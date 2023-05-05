@@ -2,8 +2,10 @@ import { useState } from 'react'
 import { BrowserRouter,Routes, Route} from 'react-router-dom'
 import {Home} from './Home.jsx'
 import {NotFound} from './NotFound.jsx'
+import {TrailPage} from './TrailPage.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './style.css'
+import { AddTrail } from './AddTrail.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -31,6 +33,8 @@ function App() {
       <Routes>
         <Route path="/" index element={<Home/>}/>
         <Route path='/*' element={<NotFound/>}/>
+        <Route path='/trails' element={<TrailPage/>}/>
+        <Route path='/addTrail/:onSubmit' element={<AddTrail/>}/>
       </Routes>
     </BrowserRouter>
     </>

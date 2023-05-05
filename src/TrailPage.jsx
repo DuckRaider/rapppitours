@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { TrailList } from "./components/TrailList";
 import { Link } from "react-router-dom";
+import { AddTrail } from "./AddTrail";
 
 export function TrailPage(){
     const [trails,setTrails] = useState(()=>{
@@ -9,6 +10,7 @@ export function TrailPage(){
 
         return JSON.parse(localValue)
     })
+    const [hiddenStateAddTrail,setHiddenStateAddTrail] = useState(false)
 
     useEffect(()=>{
         localStorage.setItem("TRAILS",JSON.stringify(trails))
@@ -24,9 +26,15 @@ export function TrailPage(){
             })
         }
     }*/
+
+    //toggle the AddTrail UI (hide/show)
+    const handleToggle = () =>{
+        setHiddenStateAddTrail(!hiddenStateAddTrail)
+    }
+
     function addTrail(newTrail){
-        setTrails((currentTrails) =>{
-            return[
+        setTrails((currentTrails)=>{
+            return [
                 ...currentTrails,
                 {id:crypto.randomUUID(),name:newTrail.name}
             ]
@@ -35,7 +43,8 @@ export function TrailPage(){
 
     return(
         <>
-        <Link to={'/addTrail/${addTrail}'}>Trail hinzufügen</Link>
+        <button onClick={handleToggle}>Add Item</button>
+        <div style={{display: hiddenStateAddTrail ? 'block' : 'none'}}><AddTrail onSubmit={addTrail}/></div>
         <TrailList trails={trails}/>
         </>
     )

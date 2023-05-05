@@ -34,7 +34,6 @@ function App() {
         <Route path="/" index element={<Home/>}/>
         <Route path='/*' element={<NotFound/>}/>
         <Route path='/trails' element={<TrailPage/>}/>
-        <Route path='/addTrail/:onSubmit' element={<AddTrail/>}/>
       </Routes>
     </BrowserRouter>
     </>

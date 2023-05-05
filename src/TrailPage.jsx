@@ -36,7 +36,7 @@ export function TrailPage(){
         setTrails((currentTrails)=>{
             return [
                 ...currentTrails,
-                {id:crypto.randomUUID(),name:newTrail.name}
+                {id:crypto.randomUUID(),name:newTrail.name,date:newTrail.date}
             ]
         })
     }

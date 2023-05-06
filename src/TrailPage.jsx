@@ -17,7 +17,7 @@ export function TrailPage(){
     },[trails])
 
     useEffect(()=>{
-        sortByName();
+        sortByDate();
     },[])
 
     /*for(let x = 0;x<4;x++){
@@ -53,18 +53,18 @@ export function TrailPage(){
 
     //actually sorts by name and then by date
     function sortByName(){
-        const sortedTrails = [...trails].sort((a, b) => {
-        if (a.name === b.name) {
-            return a.date > b.date ? 1 : -1;
-        } else {
-            return a.name > b.name ? 1 : -1;
-        }
-        });
+        let sortedTrails = [...trails].sort((a,b) => (a.name > b.name ? 1:-1))
         setTrails(sortedTrails);
     }
 
     function sortByDate(){
-        let sortedTrails = [...trails].sort((a,b) => (a.date > b.date ? 1:-1))
+        const sortedTrails = [...trails].sort((a, b) => {
+            if (a.date === b.date) {
+                return a.name > b.name ? 1 : -1;
+            } else {
+                return a.date > b.date ? 1 : -1;
+            }
+            });
         setTrails(sortedTrails)
     }
 

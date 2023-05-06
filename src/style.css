@@ -54,3 +54,21 @@ li{
 #buttonsTrailsPage button{
     width: 14%;
 }
+
+#divAddTrail{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+#formAddTrail{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 80%;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 25px;
+}
+#formAddTrail *{
+    margin: 10px;
+}

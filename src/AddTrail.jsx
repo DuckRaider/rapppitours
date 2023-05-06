@@ -42,19 +42,19 @@ export function AddTrail({onSubmit}){
     }
 
     return(
-        <>
-        <form onSubmit={handleSubmit}>
+        <div id="divAddTrail">
+        <form id="formAddTrail" onSubmit={handleSubmit}>
             <label>
-                <input value={newTrail.name} class="form-control" type="text" onChange={e=>setNewTrail({id:newTrail.id,name:e.target.value, date:newTrail.date})}/>
                 Name
+                <input value={newTrail.name} class="form-control" type="text" onChange={e=>setNewTrail({id:newTrail.id,name:e.target.value, date:newTrail.date})}/>
             </label>
             <label>
-                <input value={newTrail.date} id="startDate" className="form-control" type="date" onChange={e=>setNewTrail({id:newTrail.id,name:newTrail.name, date:e.target.value})}/>
                 Datum
+                <input value={newTrail.date} id="startDate" className="form-control" type="date" onChange={e=>setNewTrail({id:newTrail.id,name:newTrail.name, date:e.target.value})}/>
             </label>
             <button class="btn btn-primary">Add</button>
+            <div id="liveAlertPlaceholder"></div>
         </form>
-        <div id="liveAlertPlaceholder"></div>
-        </>
+        </div>
     )
 }

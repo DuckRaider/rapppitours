@@ -41,11 +41,17 @@ export function TrailPage(){
         })
     }
 
+    function deleteTrail(id){
+        setTrails((currentTrails)=>{
+            return currentTrails.filter(trail => trail.id !== id)
+        })
+    }
+
     return(
         <>
         <button onClick={handleToggle}>Add Item</button>
         <div style={{display: hiddenStateAddTrail ? 'block' : 'none'}}><AddTrail onSubmit={addTrail}/></div>
-        <TrailList trails={trails}/>
+        <TrailList trails={trails} deleteTrail={deleteTrail}/>
         </>
     )
 }

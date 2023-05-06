@@ -44,6 +44,22 @@ li{
     border-radius: 15px;
     padding: 25px;
     text-align: center;
+
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.divContentTrailInList{
+    width: 90%;
+}
+.form-check{
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form-check-input{
+    transform: scale(3);
 }
 
 #buttonsTrailsPage{

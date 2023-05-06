@@ -16,6 +16,10 @@ export function TrailPage(){
         localStorage.setItem("TRAILS",JSON.stringify(trails))
     },[trails])
 
+    useEffect(()=>{
+        sortByName();
+    },[])
+
     /*for(let x = 0;x<4;x++){
         if(trails.length<5){
             setTrails((currentTrails)=>{
@@ -47,9 +51,30 @@ export function TrailPage(){
         })
     }
 
+    //actually sorts by name and then by date
+    function sortByName(){
+        const sortedTrails = [...trails].sort((a, b) => {
+        if (a.name === b.name) {
+            return a.date > b.date ? 1 : -1;
+        } else {
+            return a.name > b.name ? 1 : -1;
+        }
+        });
+        setTrails(sortedTrails);
+    }
+
+    function sortByDate(){
+        let sortedTrails = [...trails].sort((a,b) => (a.date > b.date ? 1:-1))
+        setTrails(sortedTrails)
+    }
+
     return(
         <>
-        <button onClick={handleToggle}>Add Item</button>
+        <div id="buttonsTrailsPage">
+            <button id="btnAddTrail" className="btn btn-primary" onClick={handleToggle}>Add Item</button>
+            <button id="btnSortByName" className="btn btn-primary" onClick={sortByName}>Sortieren nach Name</button>
+            <button id="btnSortByDate" className="btn btn-primary" onClick={sortByDate}>Sortieren nach Datum</button>
+        </div>
         <div style={{display: hiddenStateAddTrail ? 'block' : 'none'}}><AddTrail onSubmit={addTrail}/></div>
         <TrailList trails={trails} deleteTrail={deleteTrail}/>
         </>

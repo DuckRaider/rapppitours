@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 export function AddTrail({onSubmit}){
-    const [newTrail,setNewTrail] = useState({id:crypto.randomUUID,name:"",date:"TT.mm.jjjj"})
+    const [newTrail,setNewTrail] = useState({id:crypto.randomUUID,name:"",date:"yyyy-MM-dd"})
 
     function handleSubmit(e){
         e.preventDefault()

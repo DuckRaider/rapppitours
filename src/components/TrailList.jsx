@@ -1,6 +1,6 @@
 import { TrailItem } from "./TrailItem";
 
-export function TrailList({trails, deleteTrail}){
+export function TrailList({trails, deleteTrail, toggleTrail}){
     return(
         <>
         <ul>
@@ -8,7 +8,7 @@ export function TrailList({trails, deleteTrail}){
             {trails.map(trail =>{
                 return(
                     //Warum sollte hier eine Kopie von diesem Trail erstellt werden???? bzw. generell
-                    <TrailItem {...trail} key={trail.id} trail={trail} deleteTrail={deleteTrail}/>
+                    <TrailItem {...trail} key={trail.id} trail={trail} deleteTrail={deleteTrail} toggleTrail={toggleTrail}/>
                 )
             })}
         </ul>

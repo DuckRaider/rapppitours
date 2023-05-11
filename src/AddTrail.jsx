@@ -50,7 +50,7 @@ export function AddTrail({onSubmit}){
             </label>
             <label>
                 Datum
-                <input value={newTrail.date} id="startDate" className="form-control" type="date" onChange={e=>setNewTrail({id:newTrail.id,name:newTrail.name, date:e.target.value})}/>
+                <input value={newTrail.date} id="startDate" className="form-control" type="datetime-local" onChange={e=>setNewTrail({id:newTrail.id,name:newTrail.name, date:e.target.value})}/>
             </label>
             <button class="btn btn-primary">Add</button>
             <div id="liveAlertPlaceholder"></div>

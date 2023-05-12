@@ -20,6 +20,21 @@ export function TrailItem({trail, deleteTrail, toggleTrail}){
         else setExpanded(true)
     }
 
+    async function getRoute(position){
+        const response = await fetch("https://api.mapbox.com/directions/v5/mapbox/cycling/" + position.coords.lat + "," + position.coords.lon + ";" + trail.lat + "," + trail.lon +"?access_token=pk.eyJ1IjoiZHVja3JhaWRlciIsImEiOiJjbGhrcG1hdGIwdTZ4M2xueDB5dnpyMnVwIn0.RQSdniof4I240SVxhPc4KQ");
+        const jsonData = await response.json();
+
+        try{
+            newTrail.lat = jsonData[0].lat
+            newTrail.lon = jsonData[0].lon
+        }catch(error){
+            appendAlert("Diese Stadt existiert nicht!","danger")
+            newTrail.city = ""
+
+            setErrorAppeared(true)
+        }
+    }
+
     return(
         <>
         <li className="liTrailInList">

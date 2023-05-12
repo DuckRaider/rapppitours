@@ -19,12 +19,32 @@ export function TrailPage(){
 
     useEffect(()=>{
         sortByDate();
-        getPosition();
 
-        /*localWeather = JSON.parse(localStorage.getItem("LOCALWEATHER"))
-        if(localWeather == null){
-            
-        }*/
+        //get the browser location
+        async function getPosition(){
+            try {
+                const position = await new Promise((resolve, reject) => 
+                    navigator.geolocation.getCurrentPosition(resolve, reject)
+                );
+    
+                console.log(position.coords.latitude, position.coords.longitude)
+    
+                return position;
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+        //handle the data in order to execute an await function inside a useEffect
+        async function fetchData() {
+            const position = await getPosition();
+    
+            if (position) {
+                console.log(position)
+            }
+        }
+    
+        fetchData();
     },[])
 
     /*for(let x = 0;x<4;x++){
@@ -89,6 +109,8 @@ export function TrailPage(){
 
     }
 
+
+    //kind of a bad code
     let localWeather
     async function getLocalWeather(lat, lon){
         const response = await fetch("https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=b09d2cf09c95da5786773b1ed1567222");
@@ -96,19 +118,6 @@ export function TrailPage(){
         localWeather = jsonData
         console.log(localWeather)
     }
-
-    function getPosition(){
-        new Promise((resolve, reject) => 
-            navigator.geolocation.getCurrentPosition(resolve, reject)
-        ).then((position) => {
-            console.log(position.coords.latitude, position.coords.longitude)
-            getLocalWeather(position.coords.latitude, position.coords.longitude)
-        })
-        .catch((err) =>{
-            console.log(err)
-        });
-    }
-
 
     return(
         <>

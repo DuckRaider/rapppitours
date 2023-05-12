@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { AddTrail } from "./AddTrail";
 
 export function TrailPage(){
+    //Hooks
     const [trails,setTrails] = useState(()=>{
         const localValue = localStorage.getItem("TRAILS")
         if(localValue == null) return []
@@ -37,6 +38,7 @@ export function TrailPage(){
         }
     }*/
 
+    //More functions
     //toggle the AddTrail UI (hide/show)
     const handleToggle = () =>{
         setHiddenStateAddTrail(!hiddenStateAddTrail)
@@ -46,7 +48,7 @@ export function TrailPage(){
         setTrails((currentTrails)=>{
             return [
                 ...currentTrails,
-                {id:crypto.randomUUID(),name:newTrail.name,date:newTrail.date}
+                {id:crypto.randomUUID(),name:newTrail.name,date:newTrail.date,city:newTrail.city,lat:newTrail.lat, lon:newTrail.lon}
             ]
         })
     }

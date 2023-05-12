@@ -28,6 +28,7 @@ export function TrailItem({trail, deleteTrail, toggleTrail}){
                     <h1>{trail.name}</h1>
                     <p>Geplant für: {trail.date}</p>
                     <p>Wetterbedingung: {trail.date}</p>
+                    <p>Ortschaft: {trail.city} {trail.lat} {trail.lon}</p>
                     <h2 style={{display: expired ? 'block' : 'none'}}>Abgelaufen</h2>
 
 

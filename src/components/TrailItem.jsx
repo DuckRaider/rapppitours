@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
+import { getBrowserLocation } from "../services/browserLocation";
 
 export function TrailItem({trail, deleteTrail, toggleTrail}){
+    const [browserLocation, setBrowserLocation] = useState({})
     const [expired, setExpired] = useState(()=>{
         let trailDate = new Date(trail.date)
         let today = new Date()
@@ -12,26 +14,28 @@ export function TrailItem({trail, deleteTrail, toggleTrail}){
     const [expanded, setExpanded] = useState(false)
     
     useEffect(()=>{
-
     },[expanded])
+    //get the browser location
+    useEffect(()=>{
+        getBrowserLocation()
+        .then(data => setBrowserLocation(data))
+    },[])
 
     function changeExpanded(){
         if(expanded) setExpanded(false)
         else setExpanded(true)
+ 
+        getRoute()
     }
 
-    async function getRoute(position){
-        const response = await fetch("https://api.mapbox.com/directions/v5/mapbox/cycling/" + position.coords.lat + "," + position.coords.lon + ";" + trail.lat + "," + trail.lon +"?access_token=pk.eyJ1IjoiZHVja3JhaWRlciIsImEiOiJjbGhrcG1hdGIwdTZ4M2xueDB5dnpyMnVwIn0.RQSdniof4I240SVxhPc4KQ");
+    async function getRoute(){
+        const response = await fetch("https://api.mapbox.com/directions/v5/mapbox/cycling/" + browserLocation.coords.latitude + "," + browserLocation.coords.longitude + ";" + trail.lat + "," + trail.lon +"?access_token=pk.eyJ1IjoiZHVja3JhaWRlciIsImEiOiJjbGhrcG1hdGIwdTZ4M2xueDB5dnpyMnVwIn0.RQSdniof4I240SVxhPc4KQ");
         const jsonData = await response.json();
 
         try{
-            newTrail.lat = jsonData[0].lat
-            newTrail.lon = jsonData[0].lon
+            console.log(jsonData)
         }catch(error){
-            appendAlert("Diese Stadt existiert nicht!","danger")
-            newTrail.city = ""
-
-            setErrorAppeared(true)
+            console.log(error)
         }
     }
 
@@ -44,6 +48,7 @@ export function TrailItem({trail, deleteTrail, toggleTrail}){
                     <p>Geplant für: {trail.date}</p>
                     <p>Wetterbedingung: {trail.date}</p>
                     <p>Ortschaft: {trail.city} {trail.lat} {trail.lon}</p>
+                    <p>Test: {browserLocation.coords?.latitude}</p>
                     <h2 style={{display: expired ? 'block' : 'none'}}>Abgelaufen</h2>
 
 

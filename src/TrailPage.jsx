@@ -20,20 +20,7 @@ export function TrailPage(){
     useEffect(()=>{
         sortByDate();
 
-        //get the browser location
-        async function getPosition(){
-            try {
-                const position = await new Promise((resolve, reject) => 
-                    navigator.geolocation.getCurrentPosition(resolve, reject)
-                );
-    
-                console.log(position.coords.latitude, position.coords.longitude)
-    
-                return position;
-            } catch (error) {
-                console.log(error)
-            }
-        }
+
 
         //handle the data in order to execute an await function inside a useEffect
         async function fetchData() {
@@ -117,6 +104,21 @@ export function TrailPage(){
         const jsonData = await response.json();
         localWeather = jsonData
         console.log(localWeather)
+    }
+
+    //get the browser location
+    async function getPosition(){
+        try {
+            const position = await new Promise((resolve, reject) => 
+                navigator.geolocation.getCurrentPosition(resolve, reject)
+            );
+
+            console.log(position.coords.latitude, position.coords.longitude)
+
+            return position;
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return(

@@ -5,6 +5,7 @@ export function AddTrail({onSubmit}){
 
     function handleSubmit(e){
         e.preventDefault()
+        getLatLonByCity("Lachen")
         if(newTrail === "") return
 
         //if valid date and name
@@ -41,20 +42,26 @@ export function AddTrail({onSubmit}){
         alertPlaceholder.innerHTML = "";
     }
 
+    async function getLatLonByCity(city){
+        const response = await fetch("http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=b09d2cf09c95da5786773b1ed1567222");
+        const jsonData = await response.json();
+        console.log(jsonData)
+    }
+
     return(
         <div id="divAddTrail">
-        <form id="formAddTrail" onSubmit={handleSubmit}>
-            <label>
-                Name
-                <input value={newTrail.name} class="form-control" type="text" onChange={e=>setNewTrail({id:newTrail.id,name:e.target.value, date:newTrail.date})}/>
-            </label>
-            <label>
-                Datum
-                <input value={newTrail.date} id="startDate" className="form-control" type="datetime-local" onChange={e=>setNewTrail({id:newTrail.id,name:newTrail.name, date:e.target.value})}/>
-            </label>
-            <button class="btn btn-primary">Add</button>
-            <div id="liveAlertPlaceholder"></div>
-        </form>
+            <form id="formAddTrail" onSubmit={handleSubmit}>
+                <label>
+                    Name
+                    <input value={newTrail.name} class="form-control" type="text" onChange={e=>setNewTrail({id:newTrail.id,name:e.target.value, date:newTrail.date})}/>
+                </label>
+                <label>
+                    Datum
+                    <input value={newTrail.date} id="startDate" className="form-control" type="datetime-local" onChange={e=>setNewTrail({id:newTrail.id,name:newTrail.name, date:e.target.value})}/>
+                </label>
+                <button class="btn btn-primary">Add</button>
+                <div id="liveAlertPlaceholder"></div>
+            </form>
         </div>
     )
 }

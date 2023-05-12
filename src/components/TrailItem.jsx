@@ -17,6 +17,7 @@ export function TrailItem({trail, deleteTrail, toggleTrail}){
                 <div className="divContentTrailInList">
                     <h1>{trail.name}</h1>
                     <p>Geplant für: {trail.date}</p>
+                    <p>Wetterbedingung: {trail.date}</p>
                     <h2 style={{display: expired ? 'block' : 'none'}}>Abgelaufen</h2>
                     <button className="btn btn-primary" onClick={() => deleteTrail(trail.id)}>Delete Trail</button>
                 </div>

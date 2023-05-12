@@ -18,6 +18,12 @@ export function TrailPage(){
 
     useEffect(()=>{
         sortByDate();
+        getPosition();
+
+        /*localWeather = JSON.parse(localStorage.getItem("LOCALWEATHER"))
+        if(localWeather == null){
+            
+        }*/
     },[])
 
     /*for(let x = 0;x<4;x++){
@@ -78,10 +84,36 @@ export function TrailPage(){
             }
             });
         setTrails(sortedTrails)
+
     }
+
+    let localWeather
+    async function getLocalWeather(lat, lon){
+        const response = await fetch("https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=b09d2cf09c95da5786773b1ed1567222");
+        const jsonData = await response.json();
+        localWeather = jsonData
+        console.log(localWeather)
+    }
+
+    function getPosition(){
+        new Promise((resolve, reject) => 
+            navigator.geolocation.getCurrentPosition(resolve, reject)
+        ).then((position) => {
+            console.log(position.coords.latitude, position.coords.longitude)
+            getLocalWeather(position.coords.latitude, position.coords.longitude)
+        })
+        .catch((err) =>{
+            console.log(err)
+        });
+    }
+
 
     return(
         <>
+        <div className="text-center">
+            <h1>Trails Übersicht</h1>
+            <h2>Current Weather: {localWeather}</h2>
+        </div>
         <div id="buttonsTrailsPage">
             <button id="btnAddTrail" className="btn btn-primary" onClick={handleToggle}>Add Item</button>
             <button id="btnSortByName" className="btn btn-primary" onClick={sortByName}>Sortieren nach Name</button>

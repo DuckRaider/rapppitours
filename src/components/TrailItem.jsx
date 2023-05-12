@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export function TrailItem({trail, deleteTrail, toggleTrail}){
     const [expired, setExpired] = useState(()=>{
@@ -9,6 +9,16 @@ export function TrailItem({trail, deleteTrail, toggleTrail}){
 
         return false
     });
+    const [expanded, setExpanded] = useState(false)
+    
+    useEffect(()=>{
+
+    },[expanded])
+
+    function changeExpanded(){
+        if(expanded) setExpanded(false)
+        else setExpanded(true)
+    }
 
     return(
         <>
@@ -18,8 +28,19 @@ export function TrailItem({trail, deleteTrail, toggleTrail}){
                     <h1>{trail.name}</h1>
                     <p>Geplant für: {trail.date}</p>
                     <p>Wetterbedingung: {trail.date}</p>
+                    <p>Ortschaft: {trail.city} {trail.lat} {trail.lon}</p>
                     <h2 style={{display: expired ? 'block' : 'none'}}>Abgelaufen</h2>
+
+
+                    {expanded && (
+                        <div className="expandedDivInTrail" style={{backgroundColor: expired ? 'red' : 'rgb(241, 255, 255)'}}>
+                            <h3>EXPANDED</h3>
+                        </div>
+                    )}
+
+
                     <button className="btn btn-primary" onClick={() => deleteTrail(trail.id)}>Delete Trail</button>
+                    <button className="btn btn-primary" onClick={() => changeExpanded()}>Expand</button>
                 </div>
 
                 <div class="form-check">

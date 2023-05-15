@@ -20,6 +20,8 @@ export function TrailPage(){
     useEffect(()=>{
         sortByDate();
 
+
+
         //handle the data in order to execute an await function inside a useEffect
         async function fetchData() {
             const position = await getPosition();
@@ -94,6 +96,17 @@ export function TrailPage(){
 
     }
 
+
+    //kind of a bad code
+    let localWeather
+    async function getLocalWeather(lat, lon){
+        const response = await fetch("https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=b09d2cf09c95da5786773b1ed1567222");
+        const jsonData = await response.json();
+        localWeather = jsonData
+        console.log(localWeather)
+    }
+
+    //get the browser location
     async function getPosition(){
         try {
             const position = await new Promise((resolve, reject) => 
@@ -108,17 +121,6 @@ export function TrailPage(){
         }
     }
 
-
-    //kind of a bad code
-    let localWeather
-    async function getLocalWeather(lat, lon){
-        const response = await fetch("https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=b09d2cf09c95da5786773b1ed1567222");
-        const jsonData = await response.json();
-        localWeather = jsonData
-        console.log(localWeather)
-    }
-
-    let localPosition;
     return(
         <>
         <div className="text-center">
@@ -131,7 +133,7 @@ export function TrailPage(){
             <button id="btnSortByDate" className="btn btn-primary" onClick={sortByDate}>Sortieren nach Datum</button>
         </div>
         <div style={{display: hiddenStateAddTrail ? 'block' : 'none'}}><AddTrail onSubmit={addTrail}/></div>
-        <TrailList trails={trails} deleteTrail={deleteTrail} toggleTrail={toggleTrail} getPosition={async () => await getPosition()}/>
+        <TrailList trails={trails} deleteTrail={deleteTrail} toggleTrail={toggleTrail}/>
         </>
     )
 }

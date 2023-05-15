@@ -20,21 +20,6 @@ export function TrailPage(){
     useEffect(()=>{
         sortByDate();
 
-        //get the browser location
-        async function getPosition(){
-            try {
-                const position = await new Promise((resolve, reject) => 
-                    navigator.geolocation.getCurrentPosition(resolve, reject)
-                );
-    
-                console.log(position.coords.latitude, position.coords.longitude)
-    
-                return position;
-            } catch (error) {
-                console.log(error)
-            }
-        }
-
         //handle the data in order to execute an await function inside a useEffect
         async function fetchData() {
             const position = await getPosition();
@@ -109,6 +94,20 @@ export function TrailPage(){
 
     }
 
+    async function getPosition(){
+        try {
+            const position = await new Promise((resolve, reject) => 
+                navigator.geolocation.getCurrentPosition(resolve, reject)
+            );
+
+            console.log(position.coords.latitude, position.coords.longitude)
+
+            return position;
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
 
     //kind of a bad code
     let localWeather
@@ -119,6 +118,7 @@ export function TrailPage(){
         console.log(localWeather)
     }
 
+    let localPosition;
     return(
         <>
         <div className="text-center">
@@ -131,7 +131,7 @@ export function TrailPage(){
             <button id="btnSortByDate" className="btn btn-primary" onClick={sortByDate}>Sortieren nach Datum</button>
         </div>
         <div style={{display: hiddenStateAddTrail ? 'block' : 'none'}}><AddTrail onSubmit={addTrail}/></div>
-        <TrailList trails={trails} deleteTrail={deleteTrail} toggleTrail={toggleTrail}/>
+        <TrailList trails={trails} deleteTrail={deleteTrail} toggleTrail={toggleTrail} getPosition={async () => await getPosition()}/>
         </>
     )
 }

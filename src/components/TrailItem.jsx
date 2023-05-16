@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { getBrowserLocation } from "../services/browserLocation";
 
 export function TrailItem({trail, deleteTrail, toggleTrail}){
+    //in order to display the browser location async, we need a state
     const [browserLocation, setBrowserLocation] = useState({})
     const [expired, setExpired] = useState(()=>{
         let trailDate = new Date(trail.date)
@@ -48,6 +49,8 @@ export function TrailItem({trail, deleteTrail, toggleTrail}){
                     <p>Geplant für: {trail.date}</p>
                     <p>Wetterbedingung: {trail.date}</p>
                     <p>Ortschaft: {trail.city} {trail.lat} {trail.lon}</p>
+                    {/*the '?' checks if it isn't null -> coords is optional.
+                    If coords isn't available, it won't print anything*/}
                     <p>Test: {browserLocation.coords?.latitude}</p>
                     <h2 style={{display: expired ? 'block' : 'none'}}>Abgelaufen</h2>
 

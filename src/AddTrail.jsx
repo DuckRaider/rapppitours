@@ -30,6 +30,7 @@ export function AddTrail({onSubmit}){
                     clearAlerts();
                 }
             }else{
+                //should be converted into an error with errorAppeared
                 appendAlert("Das Datum darf nicht in der Vergangenheit liegen!","danger")
             }
 
@@ -37,7 +38,7 @@ export function AddTrail({onSubmit}){
         }
     }
     
-    //warnings
+    //create a warning according with message as parameter
     const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
     function appendAlert(message, type){
       const wrapper = document.createElement('div')
@@ -50,6 +51,7 @@ export function AddTrail({onSubmit}){
     
       alertPlaceholder.append(wrapper)
     }
+    //remove all alerts from UI
     function clearAlerts(){
         alertPlaceholder.innerHTML = "";
     }

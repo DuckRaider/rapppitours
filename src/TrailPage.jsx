@@ -4,13 +4,14 @@ import { Link } from "react-router-dom";
 import { AddTrail } from "./AddTrail";
 
 export function TrailPage(){
-    //Hooks
+    //all the trails are stored here
     const [trails,setTrails] = useState(()=>{
         const localValue = localStorage.getItem("TRAILS")
         if(localValue == null) return []
 
         return JSON.parse(localValue)
     })
+    //check if the add trail UI is available
     const [hiddenStateAddTrail,setHiddenStateAddTrail] = useState(false)
 
     useEffect(()=>{
@@ -66,6 +67,7 @@ export function TrailPage(){
         })
     }
 
+    //save trails when a trails gets checked
     function toggleTrail(id, completed){
         setTrails(currentTrails =>{
             return currentTrails.map(trail =>{
@@ -107,6 +109,7 @@ export function TrailPage(){
     }
 
     //get the browser location
+    //useless, getBrowserLocation
     async function getPosition(){
         try {
             const position = await new Promise((resolve, reject) => 

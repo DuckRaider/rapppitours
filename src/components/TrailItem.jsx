@@ -16,8 +16,9 @@ export function TrailItem({trail, deleteTrail, toggleTrail}){
     
     useEffect(()=>{
     },[expanded])
-    //get the browser location
+    //get the browser location from extern function
     useEffect(()=>{
+        //handle the promise
         getBrowserLocation()
         .then(data => setBrowserLocation(data))
     },[])
@@ -29,6 +30,7 @@ export function TrailItem({trail, deleteTrail, toggleTrail}){
         getRoute()
     }
 
+    //get the route from browser location to destination
     async function getRoute(){
         const response = await fetch("https://api.mapbox.com/directions/v5/mapbox/cycling/" + browserLocation.coords.latitude + "," + browserLocation.coords.longitude + ";" + trail.lat + "," + trail.lon +"?access_token=pk.eyJ1IjoiZHVja3JhaWRlciIsImEiOiJjbGhrcG1hdGIwdTZ4M2xueDB5dnpyMnVwIn0.RQSdniof4I240SVxhPc4KQ");
         const jsonData = await response.json();

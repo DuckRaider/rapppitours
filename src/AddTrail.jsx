@@ -1,7 +1,8 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export function AddTrail({onSubmit}){
     const [newTrail,setNewTrail] = useState({id:crypto.randomUUID,name:"",date:"yyyy-MM-ddThh:mm",city:"", lat:0, lon:0},)
+    //a general state which turns false if any kind of validationerror appears
     const [errorAppeared, setErrorAppeared] = useState(false)
 
     async function handleSubmit(e){
@@ -16,21 +17,23 @@ export function AddTrail({onSubmit}){
             let selectedDate = new Date(newTrail.date)
             let today = new Date()
 
+            //should be converted into an error with errorAppeared
             if(today <= selectedDate){
                 await getLatLonByCity(newTrail.city)
 
-                if(errorAppeared){
+                //check if any error appeared
+                if(errorAppeared == false){
                     onSubmit(newTrail)
 
                     setNewTrail({id:crypto.randomUUID,name:"",date:"yyyy-MM-ddThh:mm", city:""})
     
                     clearAlerts();
-                }else{
-                    setErrorAppeared(true)
                 }
             }else{
                 appendAlert("Das Datum darf nicht in der Vergangenheit liegen!","danger")
             }
+
+            setErrorAppeared(false)
         }
     }
     
@@ -51,6 +54,7 @@ export function AddTrail({onSubmit}){
         alertPlaceholder.innerHTML = "";
     }
 
+    //get the lat and lon by city name
     async function getLatLonByCity(city){
         const response = await fetch("http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=b09d2cf09c95da5786773b1ed1567222");
         const jsonData = await response.json();
@@ -62,7 +66,8 @@ export function AddTrail({onSubmit}){
             appendAlert("Diese Stadt existiert nicht!","danger")
             newTrail.city = ""
 
-            setErrorAppeared(true)
+            //Somehow doesn't set true
+            setErrorAppeared(...true)
         }
     }
 

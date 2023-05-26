@@ -1,11 +1,11 @@
 import { useEffect, useRef } from "react"
-import { getBrowserLocation } from "../services/browserLocation"
 
 export function Map({trail, browserLocation}){
     useEffect(() => {
         initMap();
     },[])
     const ref = useRef(null)
+
 
     function initMap() {
         console.log("Map created")
@@ -24,7 +24,7 @@ export function Map({trail, browserLocation}){
       function calculateAndDisplayRoute(directionsService, directionsRenderer) {
         directionsService
           .route({
-            origin: new google.maps.LatLng(browserLocation.coords.latitude,browserLocation.coords.longitude),
+            origin: new google.maps.LatLng(browserLocation.coords?.latitude,browserLocation.coords?.longitude),
             destination: {
               query: trail.city,
             },
@@ -33,7 +33,7 @@ export function Map({trail, browserLocation}){
           .then((response) => {
             directionsRenderer.setDirections(response);
           })
-          .catch((e) => window.alert("Directions request failed due to " + status));
+          .catch((e) => window.alert("Directions request failed due to " + e));
       }
 
     return(

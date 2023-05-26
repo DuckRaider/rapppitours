@@ -14,6 +14,7 @@ export function TrailItem({trail, deleteTrail, toggleTrail}){
         return false
     });
     const [expanded, setExpanded] = useState(false)
+    const [mapLoaded, setMapLoaded] = useState(false)
     
     useEffect(()=>{
     },[expanded])
@@ -21,7 +22,10 @@ export function TrailItem({trail, deleteTrail, toggleTrail}){
     useEffect(()=>{
         //handle the promise
         getBrowserLocation()
-        .then(data => setBrowserLocation(data))
+        .then(data => {
+            setBrowserLocation(data);
+            setMapLoaded(true);
+        })
     },[])
 
     function changeExpanded(){
@@ -61,7 +65,9 @@ export function TrailItem({trail, deleteTrail, toggleTrail}){
                     {expanded && (
                         <div className="expandedDivInTrail" style={{backgroundColor: expired ? 'red' : 'rgb(241, 255, 255)'}}>
                             <h3>EXPANDED</h3>
-                            <Map trail={trail} browserLocation={browserLocation}/>
+                            {mapLoaded && (
+                                <Map trail={trail} browserLocation={browserLocation}/>
+                            )}
                         </div>
                     )}
 

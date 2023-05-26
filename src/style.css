@@ -93,3 +93,7 @@ li{
 #formAddTrail *{
     margin: 10px;
 }
+
+#map{
+    height: 300px;
+}

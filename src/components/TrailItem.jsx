@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { getBrowserLocation } from "../services/browserLocation";
+import { Map } from "./Map";
 
 export function TrailItem({trail, deleteTrail, toggleTrail}){
     //in order to display the browser location async, we need a state
@@ -60,6 +61,7 @@ export function TrailItem({trail, deleteTrail, toggleTrail}){
                     {expanded && (
                         <div className="expandedDivInTrail" style={{backgroundColor: expired ? 'red' : 'rgb(241, 255, 255)'}}>
                             <h3>EXPANDED</h3>
+                            <Map/>
                         </div>
                     )}
 

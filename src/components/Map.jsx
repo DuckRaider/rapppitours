@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react"
 import { getBrowserLocation } from "../services/browserLocation"
 
-export function Map(){
+export function Map({trail, browserLocation}){
     useEffect(() => {
         initMap();
     },[])
@@ -24,11 +24,9 @@ export function Map(){
       function calculateAndDisplayRoute(directionsService, directionsRenderer) {
         directionsService
           .route({
-            origin: {
-              query: "Bern",
-            },
+            origin: new google.maps.LatLng(browserLocation.coords.latitude,browserLocation.coords.longitude),
             destination: {
-              query: "Rapperswil",
+              query: trail.city,
             },
             travelMode: google.maps.TravelMode.BICYCLING,
           })

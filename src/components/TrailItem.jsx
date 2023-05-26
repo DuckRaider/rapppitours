@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react"
 import { getBrowserLocation } from "../services/browserLocation";
+import { Map } from "./Map";
+import { getWeatherIconURL } from "../services/weatherIcon";
+import { getWeather2Hours } from "../services/weatherFunctions";
 
 export function TrailItem({trail, deleteTrail, toggleTrail}){
     //in order to display the browser location async, we need a state
@@ -13,6 +16,9 @@ export function TrailItem({trail, deleteTrail, toggleTrail}){
         return false
     });
     const [expanded, setExpanded] = useState(false)
+    //rename to locationLoaded
+    const [mapLoaded, setMapLoaded] = useState(false)
+    const [weatherData, setWeatherData] = useState()
     
     useEffect(()=>{
     },[expanded])
@@ -20,26 +26,15 @@ export function TrailItem({trail, deleteTrail, toggleTrail}){
     useEffect(()=>{
         //handle the promise
         getBrowserLocation()
-        .then(data => setBrowserLocation(data))
+        .then(data => {
+            setBrowserLocation(data);
+            setMapLoaded(true);
+        })
     },[])
 
     function changeExpanded(){
         if(expanded) setExpanded(false)
         else setExpanded(true)
- 
-        getRoute()
-    }
-
-    //get the route from browser location to destination
-    async function getRoute(){
-        const response = await fetch("https://api.mapbox.com/directions/v5/mapbox/cycling/" + browserLocation.coords.latitude + "," + browserLocation.coords.longitude + ";" + trail.lat + "," + trail.lon +"?access_token=pk.eyJ1IjoiZHVja3JhaWRlciIsImEiOiJjbGhrcG1hdGIwdTZ4M2xueDB5dnpyMnVwIn0.RQSdniof4I240SVxhPc4KQ");
-        const jsonData = await response.json();
-
-        try{
-            console.log(jsonData)
-        }catch(error){
-            console.log(error)
-        }
     }
 
     return(
@@ -47,7 +42,12 @@ export function TrailItem({trail, deleteTrail, toggleTrail}){
         <li className="liTrailInList">
             <div className="divTrailInList" style={{backgroundColor: expired ? '#FF4D4D' : 'white'}}>
                 <div className="divContentTrailInList">
-                    <h1>{trail.name}</h1>
+                    <h1>{trail.name}
+                    {weatherData != null && (
+                        <>
+                        </>
+                    )}
+                    </h1>
                     <p>Geplant für: {trail.date}</p>
                     <p>Wetterbedingung: {trail.date}</p>
                     <p>Ortschaft: {trail.city} {trail.lat} {trail.lon}</p>
@@ -60,6 +60,9 @@ export function TrailItem({trail, deleteTrail, toggleTrail}){
                     {expanded && (
                         <div className="expandedDivInTrail" style={{backgroundColor: expired ? 'red' : 'rgb(241, 255, 255)'}}>
                             <h3>EXPANDED</h3>
+                            {mapLoaded && (
+                                <Map trail={trail} browserLocation={browserLocation}/>
+                            )}
                         </div>
                     )}
 

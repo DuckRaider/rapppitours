@@ -4,37 +4,37 @@ import { Map } from "./Map";
 import { getWeatherIconURL } from "../services/weatherIcon";
 import { getWeather2Hours } from "../services/weatherFunctions";
 
-export function TrailItem({trail, deleteTrail, toggleTrail}){
+export function TrailItem({trail, deleteTrail, toggleTrail, browserLocation, mapLoaded}){
     //in order to display the browser location async, we need a state
-    const [browserLocation, setBrowserLocation] = useState({})
     const [expired, setExpired] = useState(()=>{
         let trailDate = new Date(trail.date)
         let today = new Date()
+        console.log(trail.date  )
 
         if(trailDate < today) return true
 
         return false
     });
     const [expanded, setExpanded] = useState(false)
-    //rename to locationLoaded
-    const [mapLoaded, setMapLoaded] = useState(false)
     const [weatherData, setWeatherData] = useState()
     
     useEffect(()=>{
+        console.log(browserLocation.coords)
+
+        if(browserLocation.coords != null && expanded == false){
+
+            //setWeatherData(getWeather2Hours(browserLocation.coords.latitude, browserLocation.coords.longitude, trail))
+        }
+    },[browserLocation])
+    useEffect(()=>{
     },[expanded])
     //get the browser location from extern function
-    useEffect(()=>{
-        //handle the promise
-        getBrowserLocation()
-        .then(data => {
-            setBrowserLocation(data);
-            setMapLoaded(true);
-        })
-    },[])
 
     function changeExpanded(){
         if(expanded) setExpanded(false)
         else setExpanded(true)
+        setWeatherData(getWeather2Hours(browserLocation.coords.latitude, browserLocation.coords.longitude, trail))
+        console.log(weatherData)
     }
 
     return(
@@ -43,10 +43,6 @@ export function TrailItem({trail, deleteTrail, toggleTrail}){
             <div className="divTrailInList" style={{backgroundColor: expired ? '#FF4D4D' : 'white'}}>
                 <div className="divContentTrailInList">
                     <h1>{trail.name}
-                    {weatherData != null && (
-                        <>
-                        </>
-                    )}
                     </h1>
                     <p>Geplant für: {trail.date}</p>
                     <p>Wetterbedingung: {trail.date}</p>

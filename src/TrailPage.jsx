@@ -3,7 +3,7 @@ import { TrailList } from "./components/TrailList";
 import { Link } from "react-router-dom";
 import { AddTrail } from "./AddTrail";
 import { getBrowserLocation } from "./services/browserLocation";
-import {db} from './configs/firebase';
+import {db, auth} from './configs/firebase';
 import {
     collection,
     query,
@@ -35,6 +35,13 @@ export function TrailPage(){
     },[trails])
 
     useEffect(()=>{
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                console.log(user.email);
+            } else {
+                console.log("User Signed Out");
+            }
+        });
         readDataFromDb();
 
         sortByDate();

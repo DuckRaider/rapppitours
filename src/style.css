@@ -97,3 +97,7 @@ li{
 #map{
     height: 300px;
 }
+
+#loginDiv{
+    width: 80%;
+}

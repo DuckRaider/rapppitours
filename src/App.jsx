@@ -6,10 +6,10 @@ import {TrailPage} from './TrailPage.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './style.css'
 import { AddTrail } from './AddTrail.jsx'
+import { Login } from './Login.jsx'
+import { Register } from './Register.jsx'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
     <BrowserRouter>
@@ -27,6 +27,9 @@ function App() {
         <li className="nav-item">
           <a className="nav-link disabled">Disabled</a>
         </li>
+        <li className="nav-item">
+          <h1>Hallo</h1>
+        </li>
       </ul>
 
       {/*Routers for navigation*/}
@@ -34,6 +37,8 @@ function App() {
         <Route path="/" index element={<Home/>}/>
         <Route path='/*' element={<NotFound/>}/>
         <Route path='/trails' element={<TrailPage/>}/>
+        <Route path='/login' element={<Login/>}/>
+        <Route path='/register' element={<Register/>}/>
       </Routes>
     </BrowserRouter>
     </>

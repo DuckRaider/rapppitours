@@ -21,9 +21,9 @@ export function TrailItem({trail, deleteTrail, toggleTrail, browserLocation, map
     useEffect(()=>{
         console.log(browserLocation.coords)
 
-        if(browserLocation.coords != null && expanded == false){
-
-            //setWeatherData(getWeather2Hours(browserLocation.coords.latitude, browserLocation.coords.longitude, trail))
+        if(browserLocation.coords != null && expanded == true){
+            //works with expanded == true
+            setWeatherData(getWeather2Hours(browserLocation.coords.latitude, browserLocation.coords.longitude, trail))
         }
     },[browserLocation])
     useEffect(()=>{

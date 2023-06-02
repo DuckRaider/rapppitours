@@ -7,5 +7,6 @@ export function getWeatherIconURL(weatherIcon){
         url = "https://apidev.accuweather.com/developers/Media/Default/WeatherIcons/" + weatherIcon + "-s.png"
     }
 
+    console.log(url)
     return url;
 }

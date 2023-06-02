@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app"
 import { getFirestore } from "firebase/firestore"
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -39,10 +39,20 @@ function signInUser(email, password){
         const errorMessage = error.message;
     });
 }
+async function getUser(){
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            console.log(user)
+            return user;
+        } else {
+            return null;
+        }
+      });
+}
   
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app)
 const auth = getAuth()
 
-export{db, auth, createUser, signInUser}
+export{db, auth, createUser, signInUser, getUser}

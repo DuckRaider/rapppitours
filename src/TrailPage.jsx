@@ -104,7 +104,8 @@ export function TrailPage(){
             date: newTrail.date,
             city: newTrail.city,
             lat: newTrail.lat,
-            lon: newTrail.lon
+            lon: newTrail.lon,
+            user: newTrail.user
         })
 
         readDataFromDb();

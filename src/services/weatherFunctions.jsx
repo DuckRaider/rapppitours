@@ -2,7 +2,7 @@
 // Key2: LrtAsnlhQVp0M77qZ3HY6beRGyxoIGx5
 // Key3: HSu9CIAHVzfYdqjf2ffsJqRXhqy8AAGi
 
-const apiKey = "iYmE9BRLFrzHnUsE1E9ecPTC9LsO3ulq";
+const apiKey = "HSu9CIAHVzfYdqjf2ffsJqRXhqy8AAGi";
 let trailDate;
 let currentDate = new Date()
 
@@ -13,7 +13,7 @@ export function getWeather2Hours(lat, lon, trail){
 
     const locationUrl = `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${apiKey}&q=${lat}%2C${lon}`;
 
-    fetch(locationUrl)
+    return fetch(locationUrl)
     .then(res => res.json())
     .then(data => {
         const locationKey = data.Key;
@@ -50,7 +50,7 @@ function getWeather(locationKey){
     }
     //`http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${locationKey}?apikey=${apiKey}`;
 
-    fetch(weatherUrl)
+    return fetch(weatherUrl)
     .then(res => res.json())
     .then(data => {
         console.log(data)

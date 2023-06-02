@@ -16,25 +16,28 @@ export function TrailItem({trail, deleteTrail, toggleTrail, browserLocation, map
         return false
     });
     const [expanded, setExpanded] = useState(false)
-    const [weatherData, setWeatherData] = useState()
+    const [weatherData, setWeatherData] = useState(null)
     
     useEffect(()=>{
         console.log(browserLocation.coords)
 
-        if(browserLocation.coords != null && expanded == true){
+        if(browserLocation.coords != null && expired == false){
+            console.log(trail.name + " makes weather request")
             //works with expanded == true
-            setWeatherData(getWeather2Hours(browserLocation.coords.latitude, browserLocation.coords.longitude, trail))
+            getWeather2Hours(
+                browserLocation.coords.latitude,
+                browserLocation.coords.longitude,
+                trail).then((result) => setWeatherData(result));
         }
     },[browserLocation])
     useEffect(()=>{
+
     },[expanded])
     //get the browser location from extern function
 
     function changeExpanded(){
         if(expanded) setExpanded(false)
         else setExpanded(true)
-        setWeatherData(getWeather2Hours(browserLocation.coords.latitude, browserLocation.coords.longitude, trail))
-        console.log(weatherData)
     }
 
     return(
@@ -58,6 +61,12 @@ export function TrailItem({trail, deleteTrail, toggleTrail, browserLocation, map
                             <h3>EXPANDED</h3>
                             {mapLoaded && (
                                 <Map trail={trail} browserLocation={browserLocation}/>
+                            )}
+                            {weatherData != null && (
+                                <>
+                                    <img src={getWeatherIconURL(weatherData.atTime.WeatherIcon)}></img> 
+                                    <img src={getWeatherIconURL(weatherData.timeLater.WeatherIcon)}></img>
+                                </>
                             )}
                         </div>
                     )}

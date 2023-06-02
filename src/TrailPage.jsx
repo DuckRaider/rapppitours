@@ -3,14 +3,26 @@ import { TrailList } from "./components/TrailList";
 import { Link } from "react-router-dom";
 import { AddTrail } from "./AddTrail";
 import { getBrowserLocation } from "./services/browserLocation";
+import {db} from './configs/firebase';
+import {
+    collection,
+    query,
+    onSnapshot,
+    doc,
+    updateDoc,
+    deleteDoc,
+    addDoc,
+  } from "firebase/firestore";
 
 export function TrailPage(){
     //all the trails are stored here
     const [trails,setTrails] = useState(()=>{
-        const localValue = localStorage.getItem("TRAILS")
-        if(localValue == null) return []
+        // const localValue = localStorage.getItem("TRAILS")
+        // if(localValue == null) return []
 
-        return JSON.parse(localValue)
+        // return JSON.parse(localValue)
+
+        getTrailsFromDb();
     })
     //check if the add trail UI is available
     const [hiddenStateAddTrail,setHiddenStateAddTrail] = useState(false)
@@ -19,6 +31,10 @@ export function TrailPage(){
 
     useEffect(()=>{
         localStorage.setItem("TRAILS",JSON.stringify(trails))
+
+        getTrailsFromDb();
+
+        saveInDb();
     },[trails])
 
     useEffect(()=>{
@@ -60,18 +76,31 @@ export function TrailPage(){
         setHiddenStateAddTrail(!hiddenStateAddTrail)
     }
 
-    function addTrail(newTrail){
+    async function getTrailsFromDb(){
+        let dataFromDb = collection(db, "trails")
+        console.log(dataFromDb)
+    }
+
+    async function addTrail(newTrail){
         setTrails((currentTrails)=>{
             return [
                 ...currentTrails,
                 {id:crypto.randomUUID(),name:newTrail.name,date:newTrail.date,city:newTrail.city,lat:newTrail.lat, lon:newTrail.lon}
             ]
         })
+
+        await addDoc(collection(db, "trails"),{
+            newTrail
+        })
     }
 
-    function deleteTrail(id){
+    async function deleteTrail(id){
         setTrails((currentTrails)=>{
             return currentTrails.filter(trail => trail.id !== id)
+        })
+
+        await deleteDoc(collection(db, "trails"),{
+            id
         })
     }
 

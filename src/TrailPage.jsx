@@ -12,18 +12,15 @@ import {
     updateDoc,
     deleteDoc,
     addDoc,
+    setDoc,
   } from "firebase/firestore";
 
 export function TrailPage(){
     //all the trails are stored here
     const [trails,setTrails] = useState(()=>{
-        // const localValue = localStorage.getItem("TRAILS")
-        // if(localValue == null) return []
-
-        // return JSON.parse(localValue)
-
-        getTrailsFromDb();
+        return []
     })
+
     //check if the add trail UI is available
     const [hiddenStateAddTrail,setHiddenStateAddTrail] = useState(false)
     const [browserLocation, setBrowserLocation] = useState({})
@@ -32,12 +29,14 @@ export function TrailPage(){
     useEffect(()=>{
         localStorage.setItem("TRAILS",JSON.stringify(trails))
 
-        getTrailsFromDb();
+        // getTrailsFromDb();
 
-        saveInDb();
+        // saveInDb();
     },[trails])
 
     useEffect(()=>{
+        readDataFromDb();
+
         sortByDate();
 
         //handle the promise
@@ -72,36 +71,63 @@ export function TrailPage(){
 
     //More functions
     //toggle the AddTrail UI (hide/show)
+
+    async function readDataFromDb(){
+        const collectionRef = collection(db, 'trails');
+
+        const documentsArray = [];
+        
+        onSnapshot(query(collectionRef), (snapshot) => {
+          snapshot.forEach((doc) => {
+            documentsArray.push({id:doc.id,...doc.data()});
+          });
+          setTrails(documentsArray)
+          console.log(documentsArray)
+          // Use the documentsArray here or perform any further operations
+        });
+    }
+
     const handleToggle = () =>{
         setHiddenStateAddTrail(!hiddenStateAddTrail)
     }
 
-    async function getTrailsFromDb(){
-        let dataFromDb = collection(db, "trails")
-        console.log(dataFromDb)
-    }
-
     async function addTrail(newTrail){
-        setTrails((currentTrails)=>{
-            return [
-                ...currentTrails,
-                {id:crypto.randomUUID(),name:newTrail.name,date:newTrail.date,city:newTrail.city,lat:newTrail.lat, lon:newTrail.lon}
-            ]
+        await addDoc(collection(db,"trails"), {
+            name: newTrail.name,
+            date: newTrail.date,
+            city: newTrail.city,
+            lat: newTrail.lat,
+            lon: newTrail.lon
         })
 
-        await addDoc(collection(db, "trails"),{
-            newTrail
-        })
+        readDataFromDb();
+        // setTrails((currentTrails)=>{
+        //     return [
+        //         ...currentTrails,
+        //         {id:crypto.randomUUID(),name:newTrail.name,date:newTrail.date,city:newTrail.city,lat:newTrail.lat, lon:newTrail.lon}
+        //     ]
+        // })
     }
 
     async function deleteTrail(id){
-        setTrails((currentTrails)=>{
-            return currentTrails.filter(trail => trail.id !== id)
-        })
+        // setTrails((currentTrails)=>{
+        //     return currentTrails.filter(trail => trail.id !== id)
+        // })
 
-        await deleteDoc(collection(db, "trails"),{
-            id
-        })
+        const deleteTrail = async (trailId) => {
+            const trailRef = doc(db, 'trails', trailId);
+          
+            try {
+              await deleteDoc(trailRef);
+              console.log('Document successfully deleted.');
+            } catch (error) {
+              console.error('Error deleting document: ', error);
+            }
+          };
+
+        deleteTrail(id)
+
+        readDataFromDb();
     }
 
     //save trails when a trails gets checked

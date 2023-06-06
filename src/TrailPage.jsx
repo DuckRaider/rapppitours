@@ -27,14 +27,6 @@ export function TrailPage(){
     const [mapLoaded, setMapLoaded] = useState(false)
 
     useEffect(()=>{
-        localStorage.setItem("TRAILS",JSON.stringify(trails))
-
-        // getTrailsFromDb();
-
-        // saveInDb();
-    },[trails])
-
-    useEffect(()=>{
         auth.onAuthStateChanged((user) => {
             if (user) {
                 console.log(user.email);
@@ -49,6 +41,7 @@ export function TrailPage(){
         //handle the promise
         getBrowserLocation()
         .then(data => {
+            console.log(data)
             setBrowserLocation(data);
             setMapLoaded(true);
         })

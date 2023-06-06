@@ -41,7 +41,6 @@ export function TrailPage(){
         //handle the promise
         getBrowserLocation()
         .then(data => {
-            console.log(data)
             setBrowserLocation(data);
             setMapLoaded(true);
         })

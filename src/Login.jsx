@@ -1,4 +1,4 @@
-import { signInUser, signOut, auth } from "./configs/firebase"
+import { signInUser, signOut, auth, signInWithGoogle } from "./configs/firebase"
 import { useState, useEffect } from "react"
 import { onAuthStateChanged } from "firebase/auth";
 
@@ -43,6 +43,7 @@ export function Login(){
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
+                <button onClick={signInWithGoogle} className="btn btn-primary">Sign in with Google</button>
             </div>
             }
         </>

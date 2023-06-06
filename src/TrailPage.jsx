@@ -3,7 +3,7 @@ import { TrailList } from "./components/TrailList";
 import { Link } from "react-router-dom";
 import { AddTrail } from "./AddTrail";
 import { getBrowserLocation } from "./services/browserLocation";
-import {db} from './configs/firebase';
+import {db, auth} from './configs/firebase';
 import {
     collection,
     query,
@@ -27,14 +27,13 @@ export function TrailPage(){
     const [mapLoaded, setMapLoaded] = useState(false)
 
     useEffect(()=>{
-        localStorage.setItem("TRAILS",JSON.stringify(trails))
-
-        // getTrailsFromDb();
-
-        // saveInDb();
-    },[trails])
-
-    useEffect(()=>{
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                console.log(user.email);
+            } else {
+                console.log("User Signed Out");
+            }
+        });
         readDataFromDb();
 
         sortByDate();
@@ -42,6 +41,7 @@ export function TrailPage(){
         //handle the promise
         getBrowserLocation()
         .then(data => {
+            console.log(data)
             setBrowserLocation(data);
             setMapLoaded(true);
         })
@@ -79,7 +79,9 @@ export function TrailPage(){
         
         onSnapshot(query(collectionRef), (snapshot) => {
           snapshot.forEach((doc) => {
-            documentsArray.push({id:doc.id,...doc.data()});
+            if(doc.data().user == auth.currentUser.uid){
+                documentsArray.push({id:doc.id,...doc.data()});
+            }
           });
           setTrails(documentsArray)
           console.log(documentsArray)
@@ -97,7 +99,8 @@ export function TrailPage(){
             date: newTrail.date,
             city: newTrail.city,
             lat: newTrail.lat,
-            lon: newTrail.lon
+            lon: newTrail.lon,
+            user: newTrail.user
         })
 
         readDataFromDb();

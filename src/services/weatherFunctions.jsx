@@ -1,8 +1,9 @@
 // Key: iYmE9BRLFrzHnUsE1E9ecPTC9LsO3ulq
 // Key2: LrtAsnlhQVp0M77qZ3HY6beRGyxoIGx5
 // Key3: HSu9CIAHVzfYdqjf2ffsJqRXhqy8AAGi
+// Key Damjan: Jcr7mY9mmXBIHki0sA14xfvqJQ4ijNXU
 
-const apiKey = "HSu9CIAHVzfYdqjf2ffsJqRXhqy8AAGi";
+const apiKey = "Jcr7mY9mmXBIHki0sA14xfvqJQ4ijNXU";
 let trailDate;
 let currentDate = new Date()
 
@@ -31,7 +32,7 @@ function getWeather(locationKey){
     let weatherUrl;
 
     if(diffHours >= 120){
-        return "Weather not predictable"
+        return null
     }else if(diffHours >= 12){
         weatherUrl = `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=${apiKey}`
         subractor = Math.ceil(diffHours/24) - 1
@@ -46,7 +47,7 @@ function getWeather(locationKey){
             subractor2 = subractor + 2
         }
     }else{
-        return "Date is expired"
+        return null
     }
     //`http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${locationKey}?apikey=${apiKey}`;
 

@@ -62,10 +62,10 @@ export function TrailItem({trail, deleteTrail, toggleTrail, browserLocation, map
                             {mapLoaded && (
                                 <Map trail={trail} browserLocation={browserLocation}/>
                             )}
-                            {weatherData != null && (
+                            {weatherData != null &&(
                                 <>
-                                    <img src={getWeatherIconURL(weatherData.atTime.WeatherIcon)}></img> 
-                                    <img src={getWeatherIconURL(weatherData.timeLater.WeatherIcon)}></img>
+                                    <img src={getWeatherIconURL(weatherData.atTime?.WeatherIcon)}></img> 
+                                    <img src={getWeatherIconURL(weatherData.timeLater?.WeatherIcon)}></img>
                                 </>
                             )}
                         </div>

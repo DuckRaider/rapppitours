@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
+import { auth, getUser } from "./configs/firebase"
 
 export function AddTrail({onSubmit}){
-    const [newTrail,setNewTrail] = useState({id:crypto.randomUUID,name:"",date:"yyyy-MM-ddThh:mm",city:"", lat:0, lon:0},)
+    const [newTrail,setNewTrail] = useState({id:crypto.randomUUID,name:"",date:"yyyy-MM-ddThh:mm",city:"", lat:0, lon:0, user:""},)
     //a general state which turns false if any kind of validationerror appears
     const [errorAppeared, setErrorAppeared] = useState(false)
 
@@ -23,9 +24,11 @@ export function AddTrail({onSubmit}){
 
                 //check if any error appeared
                 if(errorAppeared == false){
+                    newTrail.user = auth.currentUser.uid
+                    console.log(newTrail.user)
                     onSubmit(newTrail)
 
-                    setNewTrail({id:crypto.randomUUID,name:"",date:"yyyy-MM-ddThh:mm", city:""})
+                    setNewTrail({id:crypto.randomUUID,name:"",date:"yyyy-MM-ddThh:mm", city:"", user:""})
     
                     clearAlerts();
                 }

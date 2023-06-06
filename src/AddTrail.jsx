@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { auth, getUser } from "./configs/firebase"
+import { auth } from "./configs/firebase"
 
 export function AddTrail({onSubmit}){
     const [newTrail,setNewTrail] = useState({id:crypto.randomUUID,name:"",date:"yyyy-MM-ddThh:mm",city:"", lat:0, lon:0, user:""},)

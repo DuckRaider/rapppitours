@@ -1,4 +1,5 @@
-import { signInUser } from "./configs/firebase"
+import { signInUser, auth } from "./configs/firebase"
+import { AuthDetails } from "./configs/authDetails"
 
 export function Login(){
     const handleSubmit = event => {
@@ -11,19 +12,22 @@ export function Login(){
 
 
     return(
-    <div id="loginDiv">
-        <form onSubmit={handleSubmit}>
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="inputEmail" name="inputEmail" aria-describedby="emailHelp"/>
-            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-        </div>
-        <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Password</label>
-            <input type="password" class="form-control" id="inputPassword" name="inputPassword"/>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
+        <>
+            <div id="loginDiv">
+                <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                    <label for="inputEmail" className="form-label">Email address</label>
+                    <input type="email" className="form-control" id="inputEmail" name="inputEmail" aria-describedby="emailHelp"/>
+                    <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <div className="mb-3">
+                    <label for="inputPassword" className="form-label">Password</label>
+                    <input type="password" className="form-control" id="inputPassword" name="inputPassword"/>
+                </div>
+                <button type="submit" className="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <AuthDetails/>
+        </>
     )
 }

@@ -86,7 +86,9 @@ export function TrailPage(){
         
         onSnapshot(query(collectionRef), (snapshot) => {
           snapshot.forEach((doc) => {
-            documentsArray.push({id:doc.id,...doc.data()});
+            if(doc.data().user == auth.currentUser.uid){
+                documentsArray.push({id:doc.id,...doc.data()});
+            }
           });
           setTrails(documentsArray)
           console.log(documentsArray)

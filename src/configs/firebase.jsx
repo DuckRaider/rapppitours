@@ -42,6 +42,9 @@ function signInUser(email, password){
         const errorMessage = error.message;
     });
 }
+function signOut(){
+    auth.signOut()
+}
 
   
 // Initialize Firebase
@@ -65,4 +68,4 @@ function getUser(){
     return currentUser
 }
 
-export{db, auth, createUser, signInUser, getUser}
+export{db, auth, createUser, signInUser, getUser, signOut}

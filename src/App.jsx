@@ -11,20 +11,6 @@ import { Register } from './Register.jsx'
 import { auth, getUser } from './configs/firebase.jsx'
 
 function App() {
-  const [currentUser, setCurrentUser] = useState()
-
-
-  useEffect(()=>{
-    setCurrentUser(getUser())
-    console.log("====================")
-    console.log(currentUser)
-    console.log("====================")
-  },[])
-
-  function showUserInfo(){
-    console.log(currentUser)
-  }
-
   return (
     <>
     <BrowserRouter>
@@ -41,10 +27,6 @@ function App() {
         </li>
         <li className="nav-item">
           <a className="nav-link disabled">Disabled</a>
-        </li>
-        <li className="nav-item">
-          <h1>Email: {currentUser?.email}</h1>
-          <button onClick={showUserInfo}></button>
         </li>
       </ul>
 

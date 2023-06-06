@@ -1,7 +1,20 @@
-import { signInUser, auth } from "./configs/firebase"
-import { AuthDetails } from "./configs/authDetails"
+import { signInUser, signOut, auth } from "./configs/firebase"
+import { useState, useEffect } from "react"
+import { onAuthStateChanged } from "firebase/auth";
 
 export function Login(){
+    const [authUser, setAuthUser] = useState(null)
+
+    useEffect(()=>{
+        const listen = onAuthStateChanged(auth, (user) => {
+            if(user){
+                setAuthUser(user)
+            }else{
+                setAuthUser(null)
+            }
+        })
+    },[])
+
     const handleSubmit = event => {
         event.preventDefault()
         const email = event.target.inputEmail.value
@@ -13,6 +26,10 @@ export function Login(){
 
     return(
         <>
+            { authUser ? 
+            <div id="loginSignedIn">
+                <button onClick={signOut} className="btn btn-primary">Sign out</button>
+            </div> : 
             <div id="loginDiv">
                 <form onSubmit={handleSubmit}>
                 <div className="mb-3">
@@ -27,7 +44,7 @@ export function Login(){
                 <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
             </div>
-            <AuthDetails/>
+            }
         </>
     )
 }

@@ -22,6 +22,8 @@ export function AddTrail({onSubmit}){
             if(today <= selectedDate){
                 await getLatLonByCity(newTrail.city)
 
+                checkIfUserSignedIn()
+
                 //check if any error appeared
                 if(errorAppeared == false){
                     newTrail.user = auth.currentUser.uid
@@ -68,10 +70,17 @@ export function AddTrail({onSubmit}){
             newTrail.lat = jsonData[0].lat
             newTrail.lon = jsonData[0].lon
         }catch(error){
-            appendAlert("Diese Stadt existiert nicht!","danger")
+            appendAlert("City doesn't exist","danger")
             newTrail.city = ""
 
             //Somehow doesn't set true
+            setErrorAppeared(...true)
+        }
+    }
+
+    function checkIfUserSignedIn(){
+        if(auth.currentUser == null){
+            appendAlert("No user signed in","danger")
             setErrorAppeared(...true)
         }
     }

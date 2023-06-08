@@ -179,6 +179,7 @@ li{
 #buttonsTrailsPage{
     display: flex;
     justify-content: space-around;
+    margin: auto;
 }
 
 #buttonsTrailsPage button{
@@ -362,6 +363,12 @@ footer{
     margin-right: 20px;
 }
 
+@media (max-width:1000px){
+    ul{
+        padding: 0;
+        gap:2%;
+    }
+}
 
 @media (max-width:800px){
     /* header */

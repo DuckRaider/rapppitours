@@ -27,13 +27,13 @@ export function TrailPage(){
     const [mapLoaded, setMapLoaded] = useState(false)
 
     useEffect(()=>{
-        auth.onAuthStateChanged((user) => {
-            if (user) {
-                console.log(user.email);
-            } else {
-                console.log("User Signed Out");
-            }
-        });
+        // auth.onAuthStateChanged((user) => {
+        //     if (user) {
+        //         console.log(user.email);
+        //     } else {
+        //         console.log("User Signed Out");
+        //     }
+        // });
         readDataFromDb();
 
         sortByDate();
@@ -41,7 +41,6 @@ export function TrailPage(){
         //handle the promise
         getBrowserLocation()
         .then(data => {
-            console.log(data)
             setBrowserLocation(data);
             setMapLoaded(true);
         })
@@ -79,7 +78,7 @@ export function TrailPage(){
         
         onSnapshot(query(collectionRef), (snapshot) => {
           snapshot.forEach((doc) => {
-            if(doc.data().user == auth.currentUser.uid){
+            if(doc.data().user == auth.currentUser?.uid){
                 documentsArray.push({id:doc.id,...doc.data()});
             }
           });

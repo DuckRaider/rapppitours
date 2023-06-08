@@ -1,6 +1,20 @@
-import { signInUser } from "./configs/firebase"
+import { signInUser, signOut, auth, signInWithGoogle } from "./configs/firebase"
+import { useState, useEffect } from "react"
+import { onAuthStateChanged } from "firebase/auth";
 
 export function Login(){
+    const [authUser, setAuthUser] = useState(null)
+
+    useEffect(()=>{
+        const listen = onAuthStateChanged(auth, (user) => {
+            if(user){
+                setAuthUser(user)
+            }else{
+                setAuthUser(null)
+            }
+        })
+    },[])
+
     const handleSubmit = event => {
         event.preventDefault()
         const email = event.target.inputEmail.value
@@ -11,19 +25,27 @@ export function Login(){
 
 
     return(
-    <div id="loginDiv">
-        <form onSubmit={handleSubmit}>
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="inputEmail" name="inputEmail" aria-describedby="emailHelp"/>
-            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-        </div>
-        <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Password</label>
-            <input type="password" class="form-control" id="inputPassword" name="inputPassword"/>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
+        <>
+            { authUser ? 
+            <div id="loginSignedIn">
+                <button onClick={signOut} className="btn btn-primary">Sign out</button>
+            </div> : 
+            <div id="loginDiv">
+                <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                    <label for="inputEmail" className="form-label">Email address</label>
+                    <input type="email" className="form-control" id="inputEmail" name="inputEmail" aria-describedby="emailHelp"/>
+                    <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <div className="mb-3">
+                    <label for="inputPassword" className="form-label">Password</label>
+                    <input type="password" className="form-control" id="inputPassword" name="inputPassword"/>
+                </div>
+                <button type="submit" className="btn btn-primary">Submit</button>
+                </form>
+                <button onClick={signInWithGoogle} className="btn btn-primary">Sign in with Google</button>
+            </div>
+            }
+        </>
     )
 }

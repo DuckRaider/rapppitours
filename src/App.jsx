@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BrowserRouter,Routes, Route} from 'react-router-dom'
 import {Home} from './Home.jsx'
 import {NotFound} from './NotFound.jsx'
@@ -8,6 +8,7 @@ import './style.css'
 import { AddTrail } from './AddTrail.jsx'
 import { Login } from './Login.jsx'
 import { Register } from './Register.jsx'
+import { auth, getUser } from './configs/firebase.jsx'
 
 function App() {
   return (
@@ -26,9 +27,6 @@ function App() {
         </li>
         <li className="nav-item">
           <a className="nav-link disabled">Disabled</a>
-        </li>
-        <li className="nav-item">
-          <h1>Hallo</h1>
         </li>
       </ul>
 

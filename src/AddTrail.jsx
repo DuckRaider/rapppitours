@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { auth, getUser } from "./configs/firebase"
+import { auth } from "./configs/firebase"
 
 export function AddTrail({onSubmit}){
     const [newTrail,setNewTrail] = useState({id:crypto.randomUUID,name:"",date:"yyyy-MM-ddThh:mm",city:"", lat:0, lon:0, user:""},)
@@ -21,6 +21,8 @@ export function AddTrail({onSubmit}){
             //should be converted into an error with errorAppeared
             if(today <= selectedDate){
                 await getLatLonByCity(newTrail.city)
+
+                checkIfUserSignedIn()
 
                 //check if any error appeared
                 if(errorAppeared == false){
@@ -68,10 +70,24 @@ export function AddTrail({onSubmit}){
             newTrail.lat = jsonData[0].lat
             newTrail.lon = jsonData[0].lon
         }catch(error){
-            appendAlert("Diese Stadt existiert nicht!","danger")
+            appendAlert("City doesn't exist","danger")
             newTrail.city = ""
 
             //Somehow doesn't set true
+            setErrorAppeared(...true)
+        }
+    }
+    function checkIfDateInFuture(){
+        let selectedDate = new Date(newTrail.date)
+        let today = new Date()
+
+        if(today > selectedDate){
+            setErrorAppeared(...true)
+        }
+    }
+    function checkIfUserSignedIn(){
+        if(auth.currentUser == null){
+            appendAlert("No user signed in","danger")
             setErrorAppeared(...true)
         }
     }

@@ -77,7 +77,14 @@ export function AddTrail({onSubmit}){
             setErrorAppeared(...true)
         }
     }
+    function checkIfDateInFuture(){
+        let selectedDate = new Date(newTrail.date)
+        let today = new Date()
 
+        if(today > selectedDate){
+            setErrorAppeared(...true)
+        }
+    }
     function checkIfUserSignedIn(){
         if(auth.currentUser == null){
             appendAlert("No user signed in","danger")

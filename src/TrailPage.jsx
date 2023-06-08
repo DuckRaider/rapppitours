@@ -27,13 +27,13 @@ export function TrailPage(){
     const [mapLoaded, setMapLoaded] = useState(false)
 
     useEffect(()=>{
-        auth.onAuthStateChanged((user) => {
-            if (user) {
-                console.log(user.email);
-            } else {
-                console.log("User Signed Out");
-            }
-        });
+        // auth.onAuthStateChanged((user) => {
+        //     if (user) {
+        //         console.log(user.email);
+        //     } else {
+        //         console.log("User Signed Out");
+        //     }
+        // });
         readDataFromDb();
 
         sortByDate();

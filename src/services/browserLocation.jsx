@@ -2,7 +2,6 @@
 //the rest of the code
 export function getBrowserLocation(){
     try {
-        console.log("Getting Browser location")
         //will just return a promise -> we need to await the result (e.g. with .then)
         return new Promise((resolve, reject) => 
             navigator.geolocation.getCurrentPosition(resolve, reject)

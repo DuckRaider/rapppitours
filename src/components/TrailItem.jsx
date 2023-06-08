@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react"
+import { Component, useEffect, useState } from "react"
 import { getBrowserLocation } from "../services/browserLocation";
 import { Map } from "./Map";
+import { FahrenheitToCelsius } from "../services/FahrenheitToCelsius";
 import { getWeatherIconURL } from "../services/weatherIcon";
 import { getWeather2Hours } from "../services/weatherFunctions";
 
@@ -40,44 +41,51 @@ export function TrailItem({trail, deleteTrail, toggleTrail, browserLocation, map
         else setExpanded(true)
     }
 
+    function dateInCorrectFormat(){
+        let trailDate = new Date(trail.date);
+
+        return trailDate.toLocaleDateString("de") + " - " + trailDate.getHours() + trailDate.getMinutes()
+    }
+
     return(
         <>
         <li className="liTrailInList">
-            <div className="divTrailInList" style={{backgroundColor: expired ? '#FF4D4D' : 'white'}}>
-                <div className="divContentTrailInList">
-                    <h1>{trail.name}
-                    </h1>
-                    <p>Geplant für: {trail.date}</p>
-                    <p>Wetterbedingung: {trail.date}</p>
-                    <p>Ortschaft: {trail.city} {trail.lat} {trail.lon}</p>
-                    {/*the '?' checks if it isn't null -> coords is optional.
-                    If coords isn't available, it won't print anything*/}
-                    <p>Test: {browserLocation.coords?.latitude}</p>
-                    <h2 style={{display: expired ? 'block' : 'none'}}>Abgelaufen</h2>
+            <div className="divTrailInList" style={{backgroundColor: expired ? '#FF4D4D' : trail.completed ? '#c4ffd0' : '#E1F5FE'}}>
+                <h2 className="nameTrail">{trail.name}</h2>
+                {trail.completed && (<h3>Completed</h3>)}
+                <div className="trailItemContentFlex">
+                    <div className="divContentTrailInList">
+                        <p>Planned for: {`${dateInCorrectFormat()}`}</p>
+                        <p>Weather condition: {weatherData != null ? weatherData.atTime.IconPhrase + " - " + `${FahrenheitToCelsius(weatherData.atTime.Temperature.Value)}°C` : "Weather Condition not known yet"}</p>
+                        <p>Destination: {trail.city}</p>
+                        <h2 style={{display: expired ? 'block' : 'none'}}>Abgelaufen</h2>
 
 
-                    {expanded && (
-                        <div className="expandedDivInTrail" style={{backgroundColor: expired ? 'red' : 'rgb(241, 255, 255)'}}>
-                            <h3>EXPANDED</h3>
-                            {mapLoaded && (
-                                <Map trail={trail} browserLocation={browserLocation}/>
-                            )}
-                            {weatherData != null &&(
-                                <>
-                                    <img src={getWeatherIconURL(weatherData.atTime?.WeatherIcon)}></img> 
-                                    <img src={getWeatherIconURL(weatherData.timeLater?.WeatherIcon)}></img>
-                                </>
-                            )}
+                        {expanded && (
+                            <div className="expandedDivInTrail" style={{backgroundColor: expired ? 'red' : 'rgb(241, 255, 255)'}}>
+                                <h3>EXPANDED</h3>
+                                {mapLoaded && (
+                                    <Map trail={trail} browserLocation={browserLocation}/>
+                                )}
+                                {weatherData != null &&(
+                                    <>
+                                        <img src={getWeatherIconURL(weatherData.atTime?.WeatherIcon)}></img> 
+                                        <img src={getWeatherIconURL(weatherData.timeLater?.WeatherIcon)}></img>
+                                    </>
+                                )}
+                            </div>
+                        )}
+
+                        <div className="buttonsInTrailItem">
+                            <button className="btn btn-primary" onClick={() => deleteTrail(trail.id)}>Delete Trail</button>
+                            <button className="btn btn-primary" onClick={() => changeExpanded()}>Expand</button>
+                            <button className="btn btn-primary" onClick={() => toggleTrail(trail, !trail.completed)}>Done</button>
                         </div>
-                    )}
+                    </div>
 
-
-                    <button className="btn btn-primary" onClick={() => deleteTrail(trail.id)}>Delete Trail</button>
-                    <button className="btn btn-primary" onClick={() => changeExpanded()}>Expand</button>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked={trail.completed} onChange={e => toggleTrail(trail, e.target.checked)}/>
+                    {/* <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked={trail.completed} onChange={e => toggleTrail(trail, e.target.checked)}/>
+                    </div> */}
                 </div>
             </div>
         </li>

@@ -17,13 +17,13 @@ function App() {
       {/*Header*/}
       <ul className="nav justify-content-center">
         <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="#">Home</a>
+          <a className="nav-link active" aria-current="page" href="/">Home</a>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="#">About</a>
+          <a className="nav-link" href="/about">About</a>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="#">Trails</a>
+          <a className="nav-link" href="/trails">Trails</a>
         </li>
       </ul>
 

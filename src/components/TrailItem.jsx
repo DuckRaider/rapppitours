@@ -56,7 +56,6 @@ export function TrailItem({trail, deleteTrail, toggleTrail, browserLocation, map
                 <div className="trailItemContentFlex">
                     <div className="divContentTrailInList">
                         <p>Planned for: {`${dateInCorrectFormat()}`}</p>
-                        <p>Weather condition: {weatherData != null ? weatherData.atTime.IconPhrase + " - " + `${FahrenheitToCelsius(weatherData.atTime.Temperature.Value)}°C` : "Weather Condition not known yet"}</p>
                         <p>Destination: {trail.city}</p>
 
                         {expanded && (

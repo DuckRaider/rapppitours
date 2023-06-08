@@ -32,7 +32,7 @@ export function WeatherLater({weatherData}){
                 <p>{weatherData.timeLater.Day.IconPhrase}</p>
                 <p>{`${FahrenheitToCelsius(weatherData.timeLater.Temperature.Maximum.Value)}°C`}</p>
                 <p>{weatherData.timeLater.Temperature.Maximum.Value + "°F"}</p>
-                <p>Has Precipitation: {weatherData.timeLater.Day.HasPrecipitation}</p>
+                <p>Forecast is inaccurate due to a big gap between today and the planned date</p>
             </div>}
 
         </div>

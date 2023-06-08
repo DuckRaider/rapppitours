@@ -231,7 +231,7 @@ export function TrailPage(){
     return(
         <>
         <div className="text-center">
-            <h1 id="titleTrails">Trails Übersicht</h1>
+            <h1 id="titleTrails">Trails</h1>
         </div>
         <div id="buttonsTrailsPage">
             <button id="btnAddTrail" className="btn btn-primary" onClick={handleToggle}>Add Item</button>

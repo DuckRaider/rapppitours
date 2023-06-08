@@ -27,7 +27,7 @@ body{
 /*Header*/
 ul{
     padding: 0;
-    gap:8rem;
+    gap:7%;
 }
 
 .justify-content-center{
@@ -398,8 +398,6 @@ footer{
         width: 80%;
     }
 
-
-
     
     .divTrailInList{
         width: 80%;
@@ -432,5 +430,55 @@ footer{
     }
     #formAddTrail button{
         margin-top: 30px;
+    }
+
+
+
+
+    /* Expanded trail */
+    .weatherNowAndAfterContainer{
+        flex-direction: column;
+        /* gap: 1rem; Not sure if we should keep this*/
+    }
+    .weatherAtTime p, .weatherTimeLater p{
+        text-align: center;
+    }
+
+
+
+
+    /* Login */
+    #loginDiv{
+        text-align: center;
+    }
+    #loginDiv form{
+        margin-bottom: 20px;
+    }
+    #loginDiv button{
+        width: 100%;
+    }
+
+    #signOutButton{
+        width: 80%;
+    }
+
+
+
+    /* Register */
+    #registerDiv{
+        text-align: center;
+    }
+    #registerDiv form{
+        margin-bottom: 20px;
+    }
+    #registerDiv #submitRegister{
+        width: 100%;
+    }
+
+
+
+    /* Footer */
+    #footerSocials a{
+        font-size: 0%;
     }
 }

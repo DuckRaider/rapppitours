@@ -32,7 +32,7 @@ export function WeatherAtTime({weatherData}){
                 <p>{weatherData.atTime.Day.IconPhrase}</p>
                 <p>{`${FahrenheitToCelsius(weatherData.atTime.Temperature.Maximum.Value)}°C`}</p>
                 <p>{weatherData.atTime.Temperature.Maximum.Value + "°F"}</p>
-                <p>Has Precipitation: {weatherData.atTime.Day.HasPrecipitation}</p>
+                <p>Forecast is inaccurate due to a big gap between today and the planned date</p>
             </div>}
 
         </div>

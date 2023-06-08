@@ -51,6 +51,23 @@ ul{
     color: white;
     text-shadow: 0 0 30px rgba(255, 255, 255, 0.644);
 }
+#headerAccount{
+    width: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+#headerAccountDiv{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#headerAccountDiv p{
+    margin: 0px;
+}
+#headerAccountDivEmail{
+    color: rgb(194, 194, 194);
+}
 
 /*Trails*/
 #titleTrails{
@@ -176,23 +193,48 @@ li{
     background-color: #eae5ee;
 }
 
+
+
+
+
+
 #divAddTrail{
     display: flex;
     justify-content: center;
+    margin: auto;
     margin-top: 50px;
+    width: 60%;
 }
 #formAddTrail{
     display: flex;
     justify-content: center;
     flex-direction: column;
-    width: 80%;
-    border: 1px solid black;
+    width: 100%;
+    border: 1px solid #E1F5FE;
     border-radius: 15px;
     padding: 25px;
+    background-color: #E1F5FE;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.288);
 }
 #formAddTrail *{
     margin: 10px;
 }
+#formAddTrail button{
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.288);
+    background-color: #F7F2FA;
+    color: #6750A4;
+}
+#formAddTrail button:hover{
+    background-color: #eae5ee;
+    color: #6750A4;
+}
+
+
+
+
+
 
 #map{
     height: 300px;
@@ -203,6 +245,92 @@ li{
     text-align: center;
 } */
 
+/* Login */
 #loginDiv{
+    margin: auto;
     width: 80%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid #E1F5FE;
+    border-radius: 15px;
+    padding: 25px;
+    background-color: #E1F5FE;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.288);
+}
+#loginDiv form{
+    margin-bottom: 20px;
+}
+#loginDiv button{
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.288);
+    background-color: #F7F2FA;
+    color: #6750A4;
+    width: 25%;
+    margin: auto;
+}
+#loginDiv button:hover{
+    background-color: #eae5ee;
+    color: #6750A4;
+}
+#signOutButton{
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.288);
+    background-color: #F7F2FA;
+    color: #6750A4;
+    width: 25%;
+    margin: auto;
+    margin-top: 20px;
+    height: 60px;
+    font-size: 25px;
+}
+#signOutButton:hover{
+    background-color: #eae5ee;
+    color: #6750A4;
+}
+#loginSignedIn{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+
+
+
+
+/* Register */
+#registerDiv{
+    margin: auto;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid #E1F5FE;
+    border-radius: 15px;
+    padding: 25px;
+    background-color: #E1F5FE;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.288);
+}
+#registerDiv form{
+    margin-bottom: 20px;
+}
+#registerDiv button{
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.288);
+    background-color: #F7F2FA;
+    color: #6750A4;
+    width: 25%;
+    margin: auto;
+}
+#registerDiv button:hover{
+    background-color: #eae5ee;
+    color: #6750A4;
+}
+
+.btn-close{
+    width: 30px;
 }

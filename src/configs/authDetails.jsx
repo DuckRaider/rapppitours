@@ -1,25 +1,25 @@
-// import { initializeApp } from "firebase/app"
-// import { getFirestore } from "firebase/firestore"
-// import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-// import { useEffect, useState } from "react";
-// import { auth } from "./firebase";
+import { initializeApp } from "firebase/app"
+import { getFirestore } from "firebase/firestore"
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { useEffect, useState } from "react";
+import { auth } from "./firebase";
 
-// export function AuthDetails(){
-//     const [authUser, setAuthUser] = useState(null)
+export function AuthDetails(){
+    const [authUser, setAuthUser] = useState(null)
 
-//     useEffect(()=>{
-//         const listen = onAuthStateChanged(auth, (user) => {
-//             if(user){
-//                 setAuthUser(user)
-//             }else{
-//                 setAuthUser(null)
-//             }
-//         })
-//     },[])
+    useEffect(()=>{
+        const listen = onAuthStateChanged(auth, (user) => {
+            if(user){
+                setAuthUser(user)
+            }else{
+                setAuthUser(null)
+            }
+        })
+    },[])
 
-//     return(
-//         <>
-//         {authUser ?<h1>Hello {authUser.email}</h1> : <h1>Not signed in</h1>}
-//         </>
-//     )
-// }
+    return(
+        <>
+        {authUser ?<p id="headerAccountDivEmail">{authUser.email}</p> : <p id="headerAccountDivEmail">Not signed in</p>}
+        </>
+    )
+}

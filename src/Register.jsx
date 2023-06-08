@@ -1,5 +1,3 @@
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { useState } from "react";
 import { auth, createUser } from "./configs/firebase";
 
 export function Register(){
@@ -11,7 +9,24 @@ export function Register(){
 
         if(password == passwordAgain){
             createUser(email, password)
+        }else{
+            appendAlert("Passwords not identical","danger")
         }
+    }
+
+
+    //create a warning according with message as parameter
+    function appendAlert(message, type){
+        const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+      const wrapper = document.createElement('div')
+      wrapper.innerHTML = [
+        `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+        `   <div>${message}</div>`,
+        '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+        '</div>'
+      ].join('')
+    
+      alertPlaceholder.append(wrapper)
     }
 
 
@@ -19,20 +34,22 @@ export function Register(){
         <div id="registerDiv">
             <form onSubmit={handleSubmit}>
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="inputEmail" name="inputEmail" aria-describedby="emailHelp"/>
+                <label for="inputEmail" class="form-label">Email address</label>
+                <input required type="email" class="form-control" id="inputEmail" name="inputEmail" aria-describedby="emailHelp"/>
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
             <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="inputPassword" name="inputPassword"/>
+                <label for="inputPassword" class="form-label">Password</label>
+                <input required type="password" class="form-control" id="inputPassword" name="inputPassword"/>
             </div>
             <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Repeat Password</label>
-                <input type="password" class="form-control" id="inputPasswordAgain" name="inputPasswordAgain"/>
+                <label for="inputPasswordAgain" class="form-label">Repeat Password</label>
+                <input required type="password" class="form-control" id="inputPasswordAgain" name="inputPasswordAgain"/>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
             </form>
+
+            <div id="liveAlertPlaceholder"></div>
         </div>
     )
 }

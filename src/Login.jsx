@@ -28,7 +28,8 @@ export function Login(){
         <>
             { authUser ? 
             <div id="loginSignedIn">
-                <button onClick={signOut} className="btn btn-primary">Sign out</button>
+                <h1>Already signed in!</h1>
+                <button id="signOutButton" onClick={signOut} className="btn btn-primary">Sign out</button>
             </div> : 
             <div id="loginDiv">
                 <form onSubmit={handleSubmit}>
@@ -41,9 +42,10 @@ export function Login(){
                     <label for="inputPassword" className="form-label">Password</label>
                     <input type="password" className="form-control" id="inputPassword" name="inputPassword"/>
                 </div>
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <button id="loginFormSubmit" type="submit" className="btn btn-primary">Submit</button>
                 </form>
-                <button onClick={signInWithGoogle} className="btn btn-primary">Sign in with Google</button>
+                <p>Google Account? <a id="aSignInWithGoogle" onClick={signInWithGoogle} href="#">Sign in with Google</a></p>
+                <p>No Account? <a href="register">Register now</a></p>
             </div>
             }
         </>

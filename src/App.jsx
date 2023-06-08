@@ -9,6 +9,7 @@ import { AddTrail } from './AddTrail.jsx'
 import { Login } from './Login.jsx'
 import { Register } from './Register.jsx'
 import { auth, getUser } from './configs/firebase.jsx'
+import { AuthDetails } from './configs/authDetails.jsx'
 
 function App() {
   return (
@@ -24,6 +25,14 @@ function App() {
         </li>
         <li className="nav-item">
           <a className="nav-link" href="/trails">Trails</a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link" id='headerAccount' href="/login">
+            <div id='headerAccountDiv'>
+              <p>Account</p>
+              <AuthDetails/>
+            </div>
+          </a>
         </li>
       </ul>
 

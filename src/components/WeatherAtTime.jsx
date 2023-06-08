@@ -1,34 +1,39 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { FahrenheitToCelsius } from "../services/FahrenheitToCelsius";
+import { getWeatherIconURL } from "../services/weatherIcon";
 
 export function WeatherAtTime({weatherData}){
-    let daily = false;
+    const [daily, setDaily] = useState(false)
 
     useEffect(()=>{
-        if(typeof weatherData.Day !== "undefined"){
-            daily = true;
+        console.log(weatherData)
+        if(typeof weatherData.atTime.Day !== "undefined"){
+            setDaily(true)
+            console.log("Its daily")
         }else{
-            daily = false;
+            setDaily(false)
+            console.log("Not Daily")
         }
-    })
+    },[])
 
     return(
         <div className="weatherAtTime">
-            {daily == false ? (<div>
+            {daily == false ? <div>
+                {`${console.log(daily)}`}
                 <h4>At planned date</h4>
                 <img className="weatherImages"  src={getWeatherIconURL(weatherData.atTime?.WeatherIcon)}></img> 
-                <p1>{weatherData.atTime.IconPhrase}</p1>
-                <p1>{`${FahrenheitToCelsius(weatherData.atTime.Temperature.Value)}°C`}</p1>
-                <p1>{weatherData.atTime.Temperature.Value + "°F"}</p1>
-                <p1>Precipitation probability: {weatherData.atTime.PrecipitationProbability}%</p1>
-            </div>) : (<div>
+                <p>{weatherData.atTime.IconPhrase}</p>
+                <p>{`${FahrenheitToCelsius(weatherData.atTime.Temperature.Value)}°C`}</p>
+                <p>{weatherData.atTime.Temperature.Value + "°F"}</p>
+                <p>Precipitation probability: {weatherData.atTime.PrecipitationProbability}%</p>
+            </div> : <div>
                 <h4>At planned date</h4>
                 <img className="weatherImages"  src={getWeatherIconURL(weatherData.atTime?.Day.Icon)}></img> 
-                <p1>{weatherData.atTime.Day.IconPhrase}</p1>
-                <p1>{`${FahrenheitToCelsius(weatherData.atTime.Temperature.Maximum.Value)}°C`}</p1>
-                <p1>{weatherData.atTime.Temperature.Maximum.Value + "°F"}</p1>
-                <p1>Has Precipitation: {weatherData.atTime.Day.HasPrecipitation}</p1>
-            </div>)}
+                <p>{weatherData.atTime.Day.IconPhrase}</p>
+                <p>{`${FahrenheitToCelsius(weatherData.atTime.Temperature.Maximum.Value)}°C`}</p>
+                <p>{weatherData.atTime.Temperature.Maximum.Value + "°F"}</p>
+                <p>Has Precipitation: {weatherData.atTime.Day.HasPrecipitation}</p>
+            </div>}
 
         </div>
     )

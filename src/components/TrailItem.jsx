@@ -5,6 +5,7 @@ import { FahrenheitToCelsius } from "../services/FahrenheitToCelsius";
 import { getWeatherIconURL } from "../services/weatherIcon";
 import { getWeather2Hours } from "../services/weatherFunctions";
 import { WeatherAtTime } from "./WeatherAtTime";
+import { WeatherLater } from "./WeatherLater";
 
 export function TrailItem({trail, deleteTrail, toggleTrail, browserLocation, mapLoaded}){
     //in order to display the browser location async, we need a state
@@ -23,7 +24,7 @@ export function TrailItem({trail, deleteTrail, toggleTrail, browserLocation, map
     useEffect(()=>{
         console.log(browserLocation.coords)
 
-        if(browserLocation.coords != null && expired == false){
+        if(browserLocation.coords != null && expired == false && expanded == true){
             console.log(trail.name + " makes weather request")
             //works with expanded == true
             getWeather2Hours(
@@ -31,9 +32,6 @@ export function TrailItem({trail, deleteTrail, toggleTrail, browserLocation, map
                 browserLocation.coords.longitude,
                 trail).then((result) => setWeatherData(result));
         }
-    },[browserLocation])
-    useEffect(()=>{
-
     },[expanded])
     //get the browser location from extern function
 
@@ -69,15 +67,8 @@ export function TrailItem({trail, deleteTrail, toggleTrail, browserLocation, map
                                 )}
                                 {weatherData != null ?(
                                     <div className="weatherNowAndAfterContainer">
-                                        <WeatherAtTime/>
-                                        <div className="weatherTimeLater">
-                                            <h4>2 hours after planned date</h4>
-                                            <img className="weatherImages" src={getWeatherIconURL(weatherData.timeLater?.WeatherIcon)}></img>
-                                            <p1>{weatherData.timeLater.IconPhrase}</p1>
-                                            <p1>{`${FahrenheitToCelsius(weatherData.timeLater.Temperature.Value)}°C`}</p1>
-                                            <p1>{weatherData.timeLater.Temperature.Value + "°F"}</p1>
-                                            <p1>Precipitation probability: {weatherData.timeLater.PrecipitationProbability}%</p1>
-                                        </div>
+                                        <WeatherAtTime weatherData={weatherData}/>
+                                        <WeatherLater weatherData={weatherData}/>
                                     </div>
                                 ):
                                 <h3>Weather data not available!</h3>}

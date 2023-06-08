@@ -9,7 +9,6 @@ let currentDate = new Date()
 
 //Works, if I don't call it on useEffect (resp. it partly works)
 export function getWeather2Hours(lat, lon, trail){
-    console.log(trail.name)
     trailDate = new Date("" + trail.date);
 
     const locationUrl = `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${apiKey}&q=${lat}%2C${lon}`;

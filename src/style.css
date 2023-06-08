@@ -142,6 +142,7 @@ li{
     width: 90%;
     margin-left: 30px;
     margin-right: 30px;
+    margin-top: 18px;
 }
 .divContentTrailInList p{
     text-align: left;
@@ -317,7 +318,7 @@ li{
 #registerDiv form{
     margin-bottom: 20px;
 }
-#registerDiv button{
+#registerDiv #submitRegister{
     border: none;
     border-radius: 30px;
     box-shadow: 0 4px 5px rgba(0, 0, 0, 0.288);
@@ -326,11 +327,110 @@ li{
     width: 25%;
     margin: auto;
 }
-#registerDiv button:hover{
+#registerDiv #submitRegister:hover{
     background-color: #eae5ee;
     color: #6750A4;
 }
 
-.btn-close{
+#liveAlertPlaceholder button{
     width: 30px;
+}
+
+
+
+
+
+/* Footer */
+footer{
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #eae5ee;
+    padding: 40px;
+}
+#footerContact>*{
+    margin-bottom: 4px;
+}
+#footerSocials{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.socialImage{
+    height: 30px;
+    width: 30px;
+    margin-right: 20px;
+}
+
+
+@media (max-width:800px){
+    /* header */
+    ul{
+        gap:1px;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .nav-link{
+        width: 80%;
+    }
+    #headerAccount{
+        width: 80%;
+    }
+
+
+
+    /* Trails */
+    li{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 80px;
+    }
+
+    #buttonsTrailsPage{
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
+    }
+    #buttonsTrailsPage button{
+        margin: auto;
+        width: 80%;
+    }
+
+
+
+    
+    .divTrailInList{
+        width: 80%;
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+    .buttonsInTrailItem{
+        margin-top: 24px;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .buttonsInTrailItem button{
+        margin: auto;
+        width: 100%;
+    }
+    
+    
+    
+    
+    
+    /* Add Trail */
+    #divAddTrail{
+        margin-top: 50px;
+        width: 80%;
+        text-align: center;
+    }
+    #divAddTrail input{
+        margin-left: 0%;
+        margin-bottom: 0px;
+    }
+    #formAddTrail button{
+        margin-top: 30px;
+    }
 }

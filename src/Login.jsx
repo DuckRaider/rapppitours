@@ -42,7 +42,7 @@ export function Login(){
                     <label for="inputPassword" className="form-label">Password</label>
                     <input type="password" className="form-control" id="inputPassword" name="inputPassword"/>
                 </div>
-                <button id="loginFormSubmit" type="submit" className="btn btn-primary">Submit</button>
+                <button id="loginFormSubmit" type="submit" className="btn btn-primary">Login</button>
                 </form>
                 <p>Google Account? <a id="aSignInWithGoogle" onClick={signInWithGoogle} href="#">Sign in with Google</a></p>
                 <p>No Account? <a href="register">Register now</a></p>

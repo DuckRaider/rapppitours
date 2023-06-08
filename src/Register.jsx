@@ -22,7 +22,6 @@ export function Register(){
       wrapper.innerHTML = [
         `<div class="alert alert-${type} alert-dismissible" role="alert">`,
         `   <div>${message}</div>`,
-        '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
         '</div>'
       ].join('')
     
@@ -46,7 +45,7 @@ export function Register(){
                 <label for="inputPasswordAgain" class="form-label">Repeat Password</label>
                 <input required type="password" class="form-control" id="inputPasswordAgain" name="inputPasswordAgain"/>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button id="submitRegister" type="submit" class="btn btn-primary">Register</button>
             </form>
 
             <div id="liveAlertPlaceholder"></div>

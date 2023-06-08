@@ -10,6 +10,7 @@ import { Login } from './Login.jsx'
 import { Register } from './Register.jsx'
 import { auth, getUser } from './configs/firebase.jsx'
 import { AuthDetails } from './configs/authDetails.jsx'
+import { Footer } from './components/Footer.jsx'
 
 function App() {
   return (
@@ -44,6 +45,8 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
       </Routes>
+
+      <Footer/>
     </BrowserRouter>
     </>
   )

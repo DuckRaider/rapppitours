@@ -9,6 +9,8 @@ import { AddTrail } from './AddTrail.jsx'
 import { Login } from './Login.jsx'
 import { Register } from './Register.jsx'
 import { auth, getUser } from './configs/firebase.jsx'
+import { AuthDetails } from './configs/authDetails.jsx'
+import { Footer } from './components/Footer.jsx'
 
 function App() {
   return (
@@ -17,13 +19,21 @@ function App() {
       {/*Header*/}
       <ul className="nav justify-content-center">
         <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="#">Home</a>
+          <a className="nav-link active" aria-current="page" href="/">Home</a>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="#">About</a>
+          <a className="nav-link" href="/about">About</a>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="#">Trails</a>
+          <a className="nav-link" href="/trails">Trails</a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link" id='headerAccount' href="/login">
+            <div id='headerAccountDiv'>
+              <p>Account</p>
+              <AuthDetails/>
+            </div>
+          </a>
         </li>
       </ul>
 
@@ -35,6 +45,8 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
       </Routes>
+
+      <Footer/>
     </BrowserRouter>
     </>
   )

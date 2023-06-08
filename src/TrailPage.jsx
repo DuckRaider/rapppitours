@@ -231,12 +231,12 @@ export function TrailPage(){
     return(
         <>
         <div className="text-center">
-            <h1>Trails Übersicht</h1>
+            <h1 id="titleTrails">Trails</h1>
         </div>
         <div id="buttonsTrailsPage">
             <button id="btnAddTrail" className="btn btn-primary" onClick={handleToggle}>Add Item</button>
-            <button id="btnSortByName" className="btn btn-primary" onClick={sortByName}>Sortieren nach Name</button>
-            <button id="btnSortByDate" className="btn btn-primary" onClick={sortByDate}>Sortieren nach Datum</button>
+            <button id="btnSortByName" className="btn btn-primary" onClick={sortByName}>Sort by Name</button>
+            <button id="btnSortByDate" className="btn btn-primary" onClick={sortByDate}>Sort by Date</button>
         </div>
         <div style={{display: hiddenStateAddTrail ? 'block' : 'none'}}><AddTrail onSubmit={addTrail}/></div>
         <TrailList trails={trails} deleteTrail={deleteTrail} toggleTrail={toggleTrail} browserLocation={browserLocation} mapLoaded={mapLoaded}/>

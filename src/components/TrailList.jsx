@@ -4,7 +4,7 @@ export function TrailList({trails, deleteTrail, toggleTrail, getPosition, browse
     return(
         <>
         <ul>
-            {trails.length === 0 && "Keine Trails"}
+            {trails.length === 0 && <h2 style={{textAlign:"center", marginTop:"80px", fontSize:"40px"}} id="noTrailsCreated">No trails created</h2>}
             {trails.map(trail =>{
                 return(
                     //Warum sollte hier eine Kopie von diesem Trail erstellt werden???? bzw. generell

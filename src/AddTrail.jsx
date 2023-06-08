@@ -93,11 +93,11 @@ export function AddTrail({onSubmit}){
                     <input value={newTrail.name} class="form-control" type="text" onChange={e=>setNewTrail({id:newTrail.id,name:e.target.value, date:newTrail.date, city:newTrail.city})}/>
                 </label>
                 <label>
-                    Datum
+                    Date
                     <input value={newTrail.date} id="startDate" className="form-control" type="datetime-local" onChange={e=>setNewTrail({id:newTrail.id,name:newTrail.name, date:e.target.value, city:newTrail.city})}/>
                 </label>
                 <label>
-                    Stadt
+                    Destination City
                     <input value={newTrail.city} class="form-control" type="text" onChange={e=>setNewTrail({id:newTrail.id,name:newTrail.name, date:newTrail.date, city:e.target.value})}/>
                 </label>
                 <button class="btn btn-primary">Add</button>

@@ -44,35 +44,49 @@ export function TrailItem({trail, deleteTrail, toggleTrail, browserLocation, map
     function dateInCorrectFormat(){
         let trailDate = new Date(trail.date);
 
-        return trailDate.toLocaleDateString("de") + " - " + trailDate.getHours() + trailDate.getMinutes()
+        return trailDate.toLocaleDateString("de") + " - " + trailDate.toLocaleTimeString("de")
     }
 
     return(
         <>
         <li className="liTrailInList">
-            <div className="divTrailInList" style={{backgroundColor: expired ? '#FF4D4D' : trail.completed ? '#c4ffd0' : '#E1F5FE'}}>
+            <div className="divTrailInList" style={{backgroundColor: expired ? '#ffc4c4' : trail.completed ? '#c4ffd0' : '#E1F5FE', borderColor: expired ? '#ffc4c4' : trail.completed ? '#c4ffd0' : '#E1F5FE'}}>
                 <h2 className="nameTrail">{trail.name}</h2>
                 {trail.completed && (<h3>Completed</h3>)}
+                {expired && (<h3>Expired</h3>)}
                 <div className="trailItemContentFlex">
                     <div className="divContentTrailInList">
                         <p>Planned for: {`${dateInCorrectFormat()}`}</p>
                         <p>Weather condition: {weatherData != null ? weatherData.atTime.IconPhrase + " - " + `${FahrenheitToCelsius(weatherData.atTime.Temperature.Value)}°C` : "Weather Condition not known yet"}</p>
                         <p>Destination: {trail.city}</p>
-                        <h2 style={{display: expired ? 'block' : 'none'}}>Abgelaufen</h2>
-
 
                         {expanded && (
-                            <div className="expandedDivInTrail" style={{backgroundColor: expired ? 'red' : 'rgb(241, 255, 255)'}}>
-                                <h3>EXPANDED</h3>
+                            <div className="expandedDivInTrail" style={{backgroundColor: expired ? '#ff9f9f' : '#caeefd', borderColor: expired ? '#ff9f9f' : trail.completed ? '#c4ffd0' : '#caeefd'}}>
+                                <h3>Expanded</h3>
                                 {mapLoaded && (
                                     <Map trail={trail} browserLocation={browserLocation}/>
                                 )}
-                                {weatherData != null &&(
-                                    <>
-                                        <img src={getWeatherIconURL(weatherData.atTime?.WeatherIcon)}></img> 
-                                        <img src={getWeatherIconURL(weatherData.timeLater?.WeatherIcon)}></img>
-                                    </>
-                                )}
+                                {weatherData != null ?(
+                                    <div className="weatherNowAndAfterContainer">
+                                        <div className="weatherAtTime">
+                                            <h4>At planned date</h4>
+                                            <img className="weatherImages"  src={getWeatherIconURL(weatherData.atTime?.WeatherIcon)}></img> 
+                                            <p1>{weatherData.atTime.IconPhrase}</p1>
+                                            <p1>{`${FahrenheitToCelsius(weatherData.atTime.Temperature.Value)}°C`}</p1>
+                                            <p1>{weatherData.atTime.Temperature.Value + "°F"}</p1>
+                                            <p1>Precipitation probability: {weatherData.atTime.PrecipitationProbability}%</p1>
+                                        </div>
+                                        <div className="weatherTimeLater">
+                                            <h4>2 hours after planned date</h4>
+                                            <img className="weatherImages" src={getWeatherIconURL(weatherData.timeLater?.WeatherIcon)}></img>
+                                            <p1>{weatherData.timeLater.IconPhrase}</p1>
+                                            <p1>{`${FahrenheitToCelsius(weatherData.timeLater.Temperature.Value)}°C`}</p1>
+                                            <p1>{weatherData.timeLater.Temperature.Value + "°F"}</p1>
+                                            <p1>Precipitation probability: {weatherData.timeLater.PrecipitationProbability}%</p1>
+                                        </div>
+                                    </div>
+                                ):
+                                <h3>Trail is expired! Weather data is irrelevant</h3>}
                             </div>
                         )}
 

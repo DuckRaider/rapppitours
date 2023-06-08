@@ -5,6 +5,7 @@
 body{
     margin:0;
     padding: 0;
+    background-color: rgb(255, 244, 244);
 }
 
 #mainImageHomepage{
@@ -68,18 +69,55 @@ li{
     border-radius: 15px;
     padding: 25px;
     text-align: center;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.288);
+
 }
 .trailItemContentFlex{
     display:flex;
     flex-direction: row;
     justify-content: space-between;
 }
+
+
+
+/* Expanded trail */
 .expandedDivInTrail{
     border: 1px solid black;
     border-radius: 15px;
     margin-top: 20px;
     margin-bottom: 20px;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.288);
 }
+.expandedDivInTrail h3{
+    border-bottom: 1px solid black;
+}
+.expandedDivInTrail>*{
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.weatherNowAndAfterContainer{
+    display: flex;
+}
+.weatherNowAndAfterContainer>*{
+    flex: 1;
+    border: 1px solid black;
+}
+.weatherAtTime, .weatherTimeLater{
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+
+
+
 .nameTrail{
     margin-bottom: 20px;
 }
@@ -158,7 +196,12 @@ li{
 
 #map{
     height: 300px;
+    border: 1px solid black;
 }
+/* .weatherImages{
+    width: 140px;
+    text-align: center;
+} */
 
 #loginDiv{
     width: 80%;

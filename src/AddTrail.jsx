@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { auth } from "./configs/firebase"
 
 export function AddTrail({onSubmit}){
-    const [newTrail,setNewTrail] = useState({id:crypto.randomUUID,name:"",date:"yyyy-MM-ddThh:mm",city:"", lat:0, lon:0, user:""},)
+    const [newTrail,setNewTrail] = useState({id:crypto.randomUUID,name:"",date:"yyyy-MM-ddThh:mm",city:"", lat:0, lon:0, user:"", completed: false},)
     //a general state which turns false if any kind of validationerror appears
     const [errorAppeared, setErrorAppeared] = useState(false)
 
@@ -15,28 +15,20 @@ export function AddTrail({onSubmit}){
         //we should validate through everything and then set the errorAppeared
         //if something failed
         if(newTrail.name != "" && newTrail.date != "yyyy-MM-ddThh:mm"){
-            let selectedDate = new Date(newTrail.date)
-            let today = new Date()
+            await getLatLonByCity(newTrail.city)
+            checkIfDateInFuture();
+            checkIfUserSignedIn()
 
-            //should be converted into an error with errorAppeared
-            if(today <= selectedDate){
-                await getLatLonByCity(newTrail.city)
+            //check if any error appeared
+            if(errorAppeared == false){
+                newTrail.user = auth.currentUser.uid
+                console.log(newTrail.user)
+                newTrail.completed = false
+                onSubmit(newTrail)
 
-                checkIfUserSignedIn()
+                setNewTrail({id:crypto.randomUUID,name:"",date:"yyyy-MM-ddThh:mm", city:"", user:"", completed:false})
 
-                //check if any error appeared
-                if(errorAppeared == false){
-                    newTrail.user = auth.currentUser.uid
-                    console.log(newTrail.user)
-                    onSubmit(newTrail)
-
-                    setNewTrail({id:crypto.randomUUID,name:"",date:"yyyy-MM-ddThh:mm", city:"", user:""})
-    
-                    clearAlerts();
-                }
-            }else{
-                //should be converted into an error with errorAppeared
-                appendAlert("Das Datum darf nicht in der Vergangenheit liegen!","danger")
+                clearAlerts();
             }
 
             setErrorAppeared(false)
@@ -82,6 +74,7 @@ export function AddTrail({onSubmit}){
         let today = new Date()
 
         if(today > selectedDate){
+            appendAlert("Date must be in future","danger")
             setErrorAppeared(...true)
         }
     }

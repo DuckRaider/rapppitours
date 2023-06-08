@@ -36,6 +36,7 @@ export function TrailPage(){
         // });
         readDataFromDb();
 
+        //Doesn't get executed because the new trails aren't set already
         sortByDate();
 
         //handle the promise
@@ -83,7 +84,6 @@ export function TrailPage(){
             }
           });
           setTrails(documentsArray)
-          console.log(documentsArray)
           // Use the documentsArray here or perform any further operations
         });
     }
@@ -99,7 +99,8 @@ export function TrailPage(){
             city: newTrail.city,
             lat: newTrail.lat,
             lon: newTrail.lon,
-            user: newTrail.user
+            user: newTrail.user,
+            completed: newTrail.completed
         })
 
         readDataFromDb();
@@ -131,18 +132,35 @@ export function TrailPage(){
 
         readDataFromDb();
     }
+    async function updateTrail(newTrail){
+        const trailRef = doc(db, "trails", newTrail.id);
+
+        await updateDoc(trailRef, {
+            name: newTrail.name,
+            date: newTrail.date,
+            city: newTrail.city,
+            lat: newTrail.lat,
+            lon: newTrail.lon,
+            user: newTrail.user,
+            completed: newTrail.completed
+        })
+    }
 
     //save trails when a trails gets checked
-    function toggleTrail(id, completed){
-        setTrails(currentTrails =>{
-            return currentTrails.map(trail =>{
-                if(trail.id === id){
-                    return {...trail, completed}
-                }
+    async function toggleTrail(trail, completed){
+        trail.completed = completed
+        await updateTrail(trail)
 
-                return trail
-            })
-        })
+        readDataFromDb()
+        // setTrails(currentTrails =>{
+        //     return currentTrails.map(trail =>{
+        //         if(trail.id === id){
+        //             return {...trail, completed}
+        //         }
+
+        //         return trail
+        //     })
+        // })
     }
 
     //actually sorts by name and then by date
@@ -152,6 +170,8 @@ export function TrailPage(){
     }
 
     function sortByDate(){
+        //We could add the possibility to pass a parameter
+        //So we sort by parameter instead of the trails directly
         const sortedTrails = [...trails].sort((a, b) => {
             if (a.date === b.date) {
                 return a.name > b.name ? 1 : -1;
@@ -187,6 +207,25 @@ export function TrailPage(){
     //     } catch (error) {
     //         console.log(error)
     //     }
+    // }
+    // async function testUpdate(){
+    //     let aTrail = {
+    //         id:"1b6k1JcptJXpx1Yf1frN",
+    //         city:
+    //         "Lachen",
+    //         date:
+    //         "2023-07-07T08:11",
+    //         lat:
+    //         47.9455572,
+    //         lon:
+    //         10.2388429,
+    //         name:
+    //         "O MEIN GOTT HAHAHAH",
+    //         user:
+    //         "7nAq5VjN7leosDdT61UKhe2M89j1"
+    //     }
+
+    //     await updateTrail(aTrail)
     // }
 
     return(

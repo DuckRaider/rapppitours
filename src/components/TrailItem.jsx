@@ -77,7 +77,7 @@ export function TrailItem({trail, deleteTrail, toggleTrail, browserLocation, map
                 </div>
 
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked={trail.completed} onChange={e => toggleTrail(trail.id, e.target.checked)}/>
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked={trail.completed} onChange={e => toggleTrail(trail, e.target.checked)}/>
                 </div>
             </div>
         </li>

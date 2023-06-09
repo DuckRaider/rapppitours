@@ -21,12 +21,9 @@ function App() {
         <li className="nav-item">
           <a className="nav-link active" aria-current="page" href="/">Home</a>
         </li>
-        <li className="nav-item">
+        {/* <li className="nav-item">
           <a className="nav-link" href="/about">About</a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="/trails">Trails</a>
-        </li>
+        </li> */}
         <li className="nav-item">
           <a className="nav-link" id='headerAccount' href="/login">
             <div id='headerAccountDiv'>
@@ -34,6 +31,9 @@ function App() {
               <AuthDetails/>
             </div>
           </a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link" href="/trails">Trails</a>
         </li>
       </ul>
 

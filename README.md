@@ -10,7 +10,6 @@ Die Webseite läuft über React + Vite. Um das Programm starten zu können, muss
 ### Installationen
 Wenn das Programm nicht funktionieren sollte, dann könnte dies an der Absenz einiger Installationen liegen. Diese lassen sich mit folgenden Befehlen installieren
 - `npm i`
-- `npm install react-router-dom`
 ## Browser Support
 Die Applikation wurde auf den neusten Versionen folgender Browser getestet:
 - **Google Chrome**

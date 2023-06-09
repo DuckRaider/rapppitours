@@ -233,7 +233,7 @@ export function TrailPage(){
             <h1 id="titleTrails">Trails</h1>
         </div>
         <div id="buttonsTrailsPage">
-            <button id="btnAddTrail" className="btn btn-primary" onClick={handleToggle}>Add Item</button>
+            <button id="btnAddTrail" className="btn btn-primary" onClick={handleToggle}>Add Trail</button>
             <button id="btnSortByName" className="btn btn-primary" onClick={sortByName}>Sort by Name</button>
             <button id="btnSortByDate" className="btn btn-primary" onClick={sortByDate}>Sort by Date</button>
         </div>

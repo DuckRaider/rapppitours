@@ -70,7 +70,7 @@ export function TrailItem({trail, deleteTrail, toggleTrail, browserLocation, map
                                         <WeatherLater weatherData={weatherData}/>
                                     </div>
                                 ):
-                                <h3>Weather data not available!</h3>}
+                                <h3>Weather data not available! Too far in future or already expired!</h3>}
                             </div>
                         )}
 

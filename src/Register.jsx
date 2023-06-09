@@ -39,11 +39,11 @@ export function Register(){
             </div>
             <div class="mb-3">
                 <label for="inputPassword" class="form-label">Password</label>
-                <input required type="password" class="form-control" id="inputPassword" name="inputPassword"/>
+                <input required type="password" minLength={6} class="form-control" id="inputPassword" name="inputPassword"/>
             </div>
             <div class="mb-3">
                 <label for="inputPasswordAgain" class="form-label">Repeat Password</label>
-                <input required type="password" class="form-control" id="inputPasswordAgain" name="inputPasswordAgain"/>
+                <input required type="password" minLength={6} class="form-control" id="inputPasswordAgain" name="inputPasswordAgain"/>
             </div>
             <button id="submitRegister" type="submit" class="btn btn-primary">Register</button>
             </form>

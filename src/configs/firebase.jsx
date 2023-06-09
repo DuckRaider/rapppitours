@@ -20,8 +20,6 @@ function createUser(email, password){
       const user = userCredential.user;
       alert("WORKED")
       setLoginInformation(user.email)
-
-      window.location.replace("/trails")
     })
     .catch((error) => {
       const errorCode = error.code;

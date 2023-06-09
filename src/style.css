@@ -8,8 +8,7 @@ body{
     background-color: rgb(255, 244, 244);
 }
 #logo{
-    width: 1000px;
-    height: 340px;
+    width: 600px;
     display: block;
     margin: auto;
 }
@@ -369,6 +368,11 @@ footer{
     ul{
         padding: 0;
         gap:2%;
+    }
+    #logo{
+        width: 80%;
+        display: block;
+        margin: auto;
     }
 }
 

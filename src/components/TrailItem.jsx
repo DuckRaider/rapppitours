@@ -59,7 +59,7 @@ export function TrailItem({trail, deleteTrail, toggleTrail, browserLocation, map
                         <p>Destination: {trail.city}</p>
 
                         {expanded && (
-                            <div className="expandedDivInTrail" style={{backgroundColor: expired ? '#ff9f9f' : '#caeefd', borderColor: expired ? '#ff9f9f' : trail.completed ? '#c4ffd0' : '#caeefd'}}>
+                            <div className="expandedDivInTrail" style={{backgroundColor: expired ? '#ff9f9f' : trail.completed ? '#9effb2' : '#caeefd', borderColor: expired ? '#ff9f9f' : trail.completed ? '#9effb2' : '#caeefd'}}>
                                 <h3>Expanded</h3>
                                 {mapLoaded && (
                                     <Map trail={trail} browserLocation={browserLocation}/>

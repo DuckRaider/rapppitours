@@ -36,7 +36,6 @@ export function TrailPage(){
         // });
         readDataFromDb();
 
-        //Doesn't get executed because the new trails aren't set already
         sortByDate();
 
         //handle the promise

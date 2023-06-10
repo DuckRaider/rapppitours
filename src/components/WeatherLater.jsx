@@ -19,7 +19,6 @@ export function WeatherLater({weatherData}){
     return(
         <div className="weatherTimeLater">
             {daily == false ? <div>
-                {`${console.log(daily)}`}
                 <h4>At planned date</h4>
                 <img className="weatherImages"  src={getWeatherIconURL(weatherData.timeLater?.WeatherIcon)}></img> 
                 <p>{weatherData.timeLater.IconPhrase}</p>
@@ -27,7 +26,7 @@ export function WeatherLater({weatherData}){
                 <p>{weatherData.timeLater.Temperature.Value + "°F"}</p>
                 <p>Precipitation probability: {weatherData.timeLater.PrecipitationProbability}%</p>
             </div> : <div>
-                <h4>At planned date</h4>
+                <h4>2 hours later</h4>
                 <img className="weatherImages"  src={getWeatherIconURL(weatherData.timeLater?.Day.Icon)}></img> 
                 <p>{weatherData.timeLater.Day.IconPhrase}</p>
                 <p>{`${FahrenheitToCelsius(weatherData.timeLater.Temperature.Maximum.Value)}°C`}</p>

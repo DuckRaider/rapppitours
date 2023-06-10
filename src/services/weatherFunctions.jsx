@@ -3,7 +3,7 @@
 // Key3: HSu9CIAHVzfYdqjf2ffsJqRXhqy8AAGi
 // Key Damjan: Jcr7mY9mmXBIHki0sA14xfvqJQ4ijNXU
 
-const apiKey = "HSu9CIAHVzfYdqjf2ffsJqRXhqy8AAGi";
+const apiKey = "LrtAsnlhQVp0M77qZ3HY6beRGyxoIGx5";
 let trailDate;
 let currentDate = new Date()
 

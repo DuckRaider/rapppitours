@@ -19,7 +19,6 @@ export function WeatherAtTime({weatherData}){
     return(
         <div className="weatherAtTime">
             {daily == false ? <div>
-                {`${console.log(daily)}`}
                 <h4>At planned date</h4>
                 <img className="weatherImages"  src={getWeatherIconURL(weatherData.atTime?.WeatherIcon)}></img> 
                 <p>{weatherData.atTime.IconPhrase}</p>
@@ -27,7 +26,7 @@ export function WeatherAtTime({weatherData}){
                 <p>{weatherData.atTime.Temperature.Value + "°F"}</p>
                 <p>Precipitation probability: {weatherData.atTime.PrecipitationProbability}%</p>
             </div> : <div>
-                <h4>At planned date</h4>
+                <h4>2 hours later</h4>
                 <img className="weatherImages"  src={getWeatherIconURL(weatherData.atTime?.Day.Icon)}></img> 
                 <p>{weatherData.atTime.Day.IconPhrase}</p>
                 <p>{`${FahrenheitToCelsius(weatherData.atTime.Temperature.Maximum.Value)}°C`}</p>

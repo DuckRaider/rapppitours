@@ -4,7 +4,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, on
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyAxrBuw5tj788SweSp4HoCpyoqkUcnNtrA",
+    apiKey: "secret",
     authDomain: "rappitoursdb.firebaseapp.com",
     projectId: "rappitoursdb",
     storageBucket: "rappitoursdb.appspot.com",

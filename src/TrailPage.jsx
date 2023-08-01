@@ -27,13 +27,6 @@ export function TrailPage(){
     const [mapLoaded, setMapLoaded] = useState(false)
 
     useEffect(()=>{
-        // auth.onAuthStateChanged((user) => {
-        //     if (user) {
-        //         console.log(user.email);
-        //     } else {
-        //         console.log("User Signed Out");
-        //     }
-        // });
         readDataFromDb();
 
         sortByDate();
@@ -45,31 +38,7 @@ export function TrailPage(){
             setMapLoaded(true);
         })
 
-        //handle the data in order to execute an await function inside a useEffect
-        // async function fetchData() {
-        //     const position = await getPosition();
-    
-        //     if (position) {
-        //         console.log(position)
-        //     }
-        // }
-    
-        // fetchData();
     },[])
-
-    /*for(let x = 0;x<4;x++){
-        if(trails.length<5){
-            setTrails((currentTrails)=>{
-                return[
-                    ...currentTrails,
-                    {id:crypto.randomUUID(),name:"A Name"}
-                ]
-            })
-        }
-    }*/
-
-    //More functions
-    //toggle the AddTrail UI (hide/show)
 
     async function readDataFromDb(){
         const collectionRef = collection(db, 'trails');
@@ -103,19 +72,9 @@ export function TrailPage(){
         })
 
         readDataFromDb();
-        // setTrails((currentTrails)=>{
-        //     return [
-        //         ...currentTrails,
-        //         {id:crypto.randomUUID(),name:newTrail.name,date:newTrail.date,city:newTrail.city,lat:newTrail.lat, lon:newTrail.lon}
-        //     ]
-        // })
     }
 
     async function deleteTrail(id){
-        // setTrails((currentTrails)=>{
-        //     return currentTrails.filter(trail => trail.id !== id)
-        // })
-
         const deleteTrail = async (trailId) => {
             const trailRef = doc(db, 'trails', trailId);
           
@@ -151,15 +110,6 @@ export function TrailPage(){
         await updateTrail(trail)
 
         readDataFromDb()
-        // setTrails(currentTrails =>{
-        //     return currentTrails.map(trail =>{
-        //         if(trail.id === id){
-        //             return {...trail, completed}
-        //         }
-
-        //         return trail
-        //     })
-        // })
     }
 
     //actually sorts by name and then by date
@@ -181,51 +131,6 @@ export function TrailPage(){
         setTrails(sortedTrails)
 
     }
-
-
-    //kind of a bad code
-    // let localWeather
-    // async function getLocalWeather(lat, lon){
-    //     const response = await fetch("https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=b09d2cf09c95da5786773b1ed1567222");
-    //     const jsonData = await response.json();
-    //     localWeather = jsonData
-    //     console.log(localWeather)
-    // }
-
-    //get the browser location
-    //useless, getBrowserLocation
-    // async function getPosition(){
-    //     try {
-    //         const position = await new Promise((resolve, reject) => 
-    //             navigator.geolocation.getCurrentPosition(resolve, reject)
-    //         );
-
-    //         console.log(position.coords.latitude, position.coords.longitude)
-
-    //         return position;
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
-    // async function testUpdate(){
-    //     let aTrail = {
-    //         id:"1b6k1JcptJXpx1Yf1frN",
-    //         city:
-    //         "Lachen",
-    //         date:
-    //         "2023-07-07T08:11",
-    //         lat:
-    //         47.9455572,
-    //         lon:
-    //         10.2388429,
-    //         name:
-    //         "O MEIN GOTT HAHAHAH",
-    //         user:
-    //         "7nAq5VjN7leosDdT61UKhe2M89j1"
-    //     }
-
-    //     await updateTrail(aTrail)
-    // }
 
     return(
         <>

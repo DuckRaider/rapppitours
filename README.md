@@ -1,7 +1,7 @@
 
 # RappiTours V. 1.3
 ## *Anmerkung*
-Da das Gebiet um den Obersee herum durchaus international ist, wird die Seite auf Englisch veröffentlicht. Die Dokumentation und alle weiteren Dokumente bleiben auf Deutsch, da der Auftraggeber (Silvan Gehrig) als einzige Person Zugriff auf dieses Dateien hat.
+Da das Gebiet um den Obersee herum durchaus international ist, wird die Seite auf Englisch veröffentlicht. Die Dokumentation und alle weiteren Dokumente bleiben auf Deutsch, da der Auftraggeber (Silvan Gehrig) als einzige Person Zugriff auf diese Dateien hat bzw haben sollte.
 
 
 ## Start und Konfiguration
